@@ -11,46 +11,22 @@ import {
 } from '../../redux/slices/productSlice/productSlice';
 import { TYPE } from '../../theme';
 
+import TalentDiv from '../../components/Card/Talent'
+
 const ProductsContainer = styled.div`
   padding: 0; 
+  width: 100%;
+  max-width: 997px;
+  margin: 0 auto;
 `;
 
 const ProductsWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  ${MEDIA_QUERY.sm}{
-    justify-content: center;
-  }
+  grid-template-columns: repeat(3, 1fr);
 `;
 
 const ProductContainer = styled.div`
-  width: 30.333333%;
-  ${MEDIA_QUERY.lg} {
-    width: 45%;
-    margin: 0 2.5%;
-    margin-top: 30px;
-  }
-  ${MEDIA_QUERY.md} {
-    width: 60%;
-    margin: 0 20%;
-    margin-top: 30px;
-  }
-  ${MEDIA_QUERY.sm}{
-    width: 100%;
-    margin: 0;
-    margin-top: 30px;
-  }
-  margin: 0 1.5%;
-  border-width: 0 0 0 0;
-  border-style: solid solid solid solid;
-  border-color: rgba(176, 169, 134, 1) rgba(176, 169, 134, 1) rgba(176, 169, 134, 1) rgba(176, 169, 134, 1);
-  border-radius: 0 0 0 0;
-  box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
-  overflow: hidden;
-  transform: translateZ(0);
-  margin-top: 20px;
+  width: 100%;
+  max-width: 313px;
   font-size: 15px;
   color: #000000;
   font-weight: bold;
@@ -176,19 +152,26 @@ export const Products = ({
   return (
     <>
       <ProductsContainer $padding={$padding}>
-        <ProductsWrap $justify={$justify}>
+        <ProductsWrap className='grid-container'>
           <>
-            {products.map((product) => {
+            {products.map((v, i) => {
               return (
-                <Product
-                  key={product.id}
-                  product={product}
-                  onLoad={onLoad}
-                  loaded={loaded}
-                  $width={$width}
-                  $height={$height}
-                  $margin={$margin}
-                />
+                <TalentDiv 
+                  key={'gallery' + i} 
+                  title={v.remark}
+                  price={v.price}
+                  author={v.name}
+                  pic={v.picture_url}> 
+                </TalentDiv>
+                // <Product
+                //   key={product.id}
+                //   product={product}
+                //   onLoad={onLoad}
+                //   loaded={loaded}
+                //   $width={$width}
+                //   $height={$height}
+                //   $margin={$margin}
+                // />
               );
             })}
           </>

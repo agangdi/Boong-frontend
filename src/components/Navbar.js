@@ -20,16 +20,13 @@ const NavbarContainer = styled.div`
   left: 0;
   width: 100%;
   margin: 0 auto;
-  height: ${(props) => (props.$size === 'sm' ? '65px' : '135px')};
-  background: #fcfcfc;
-  padding: 25px 0;
+  background: #FFFFFF;
+  padding: 40px 0;
   z-index: 99;
   ${MEDIA_QUERY.lg} {
-    height: ${(props) => (props.$size === 'sm' ? '65px' : '165px')};
-    padding: 10px 0;
+    padding: 20px 0;
   }
   ${MEDIA_QUERY.sm} {
-    height: ${(props) => (props.$size === 'sm' ? '65px' : '115px')};
     padding: 10px 0;
   }
 `;
@@ -126,6 +123,24 @@ const Navbar = () => {
         <LeftSide>
           <Logo />
           <SearchBar />
+          <span 
+            style={{
+              marginLeft: '5rem'
+            }}
+            onClick={() => {
+              window.open("https://docs.google.com/forms/d/e/1FAIpQLSeGoEA3tuWG-S1NwUyCylmvCwTjALEbh-eVOqoQXHDp3pEmTA/viewform")
+            }} className="gradient-radius-btn">
+            My Artworks
+          </span>
+          <span 
+            style={{
+              marginLeft: '2rem'
+            }}
+            onClick={() => {
+              window.open("https://docs.google.com/forms/d/e/1FAIpQLSeGoEA3tuWG-S1NwUyCylmvCwTjALEbh-eVOqoQXHDp3pEmTA/viewform")
+            }} className="blank-radius-btn">
+            Mint Artworks
+          </span>
         </LeftSide>
 
         <RightSide>

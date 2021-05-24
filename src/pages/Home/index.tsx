@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 // import { useTranslation } from 'react-i18next'
 import { MEDIA_QUERY } from '../../constants/style';
-
+import TalentDiv from '../../components/Card/Talent'
 
 const PageWrapper = styled.div`
   width: 100%;
+  background-color: #FFFFFF;
   ${MEDIA_QUERY.md} { 
     display: flex;
     flex-direction: column;
@@ -70,49 +71,6 @@ const Talents = styled(Con)`
   padding-bottom: 30px;
 `
 
-const TalentDiv = styled.div`
-  width: 100%;
-  max-width: 313px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  padding: 41px 29px;
-`
-
-const Talent = styled.div`
-  width: 255px;
-  height: 363px;
-  font-family: SourceHanSansCN-Heavy;
-`
-
-const TalentInner = styled.div`
-  width: 90%;
-  text-align: left;
-  margin:0 auto
-`
-
-const TalentTitle = styled(TalentInner)`
-  margin-top: 11px;
-  font-size: 12px;
-  color: #6a6a6a;
-  letter-spacing: 1px;
-`
-
-const TalentPrice = styled(TalentInner)`
-  font-size: 14px;
-  color: #F94108;
-  letter-spacing: 1.17px;
-  line-height: 17px;
-  text-align: right;
-`
-
-const TalentAuthor = styled(TalentInner)`
-  font-size: 12px;
-  color: #6a6a6a;
-  letter-spacing: 1px;
-`
 
 const MoreBtn = styled.span`
   // margin-top: 24px;
@@ -221,18 +179,12 @@ export default function Home() {
         </Con>
         <Talents className="grid-container">
             {galleries.map((v, i) => {
-              return <TalentDiv key={'gallery' + i}>
-                  <Talent>
-                    <div style={{
-                      width: "100%", 
-                      height: "305px",
-                      backgroundPosition: 'center',
-                      backgroundSize: '100% 100%',
-                      backgroundImage:`url(${v.pic}`}}></div>
-                    <TalentTitle>{v.title}</TalentTitle>
-                    <TalentPrice>{v.price}</TalentPrice>
-                    <TalentAuthor>{v.author}</TalentAuthor>
-                  </Talent>
+              return <TalentDiv 
+                  key={'gallery' + i} 
+                  title={v.title}
+                  price={v.price}
+                  author={v.author}
+                  pic={v.pic}> 
                 </TalentDiv>
             })}
         </Talents>

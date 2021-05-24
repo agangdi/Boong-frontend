@@ -1,3 +1,5 @@
+html, body{
+}
 .gradient-text {
   font-size: 24px;
   font-weight: bold;
@@ -61,4 +63,47 @@
   font-size: 16px;
   color: #FFFFFF;
   letter-spacing: 0.33px;
+}
+
+.page-title2{
+  font-family: ChalkboardSE-Bold;
+  font-size: 24px;
+  color: #6a6a6a;
+  letter-spacing: 2px;
+}
+
+.page-subtitle{
+  font-family: SourceHanSansCN-Normal;
+  font-size: 26px;
+  color: #A1A1A1;
+  letter-spacing: 0.54px;
+}
+
+.blank-radius-btn{
+  border: 1px solid #C5C5C5;
+  border-radius: 8px;
+  padding: 0.8rem 2.5rem;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  font-family: SourceHanSansCN-Heavy;
+  font-size: 16px;
+  color: #A1A1A1;
+  letter-spacing: 0.33px;
+}
+
+.gradient-radius-btn{
+  background-image: linear-gradient(225deg, #A1E1F1 0%, #ECB500 100%);
+  padding: 0.8rem 2.5rem;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  font-family: SourceHanSansCN-Heavy;
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 0.33px;
+  border: none;
 }

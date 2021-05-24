@@ -99,6 +99,7 @@ import { MEDIA_QUERY } from '../constants/style'
 // import FAQPage from './NFTFAQPage';
 // import ContactUsPage from './NFTContactUsPage';
 // import RulesPage from './NFTRulesPage';
+import BlindBox from './BlindBox'
 
 
 const AppWrapper = styled.div`
@@ -182,6 +183,7 @@ export default function App() {
           <Web3ReactManager>
             <Routes>
               <Route path="/home" element={<Home/>}/>
+              <Route path="/blindbox" element={<BlindBox />}/>
               <Route path="/swap" element={<Swaping/>}/>
               {/* <Route path="/swaping" element={<Swaping/>}/> */}
               <Route path="/claim" element={<OpenClaimAddressModalAndRedirectToSwap/>}/>

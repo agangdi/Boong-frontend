@@ -315,8 +315,8 @@ export default function Header() {
             <StyledNavLink id={`Earn-nav-link`} to={'/stake'}>
               {t('EarningTrade')}
             </StyledNavLink>
-            <StyledNavLink to="/mint">
-              {t('BlinkBox')}
+            <StyledNavLink to="/blindbox">
+              {t('BlindBox')}
             </StyledNavLink>
           </HeaderLinks>
         </HeaderRow>

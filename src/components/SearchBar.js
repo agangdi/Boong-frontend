@@ -11,8 +11,8 @@ const SearchBarContainer = styled.div`
   display: flex;F
   justify-content: space-between;
   align-items: center;
-  width: 500px;
-  height: 32px;
+  width: 358px;
+  height: 56px;
   border-radius: 0px;
   margin-left: 140px;
   box-shadow: ${EFFECT.shadowLight};
