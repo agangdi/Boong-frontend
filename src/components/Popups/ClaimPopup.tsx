@@ -100,7 +100,7 @@ export default function ClaimPopup() {
               </span>
             </TYPE.white>
             <TYPE.subHeader style={{ paddingTop: '0.5rem', textAlign: 'center' }} color="white">
-              {`Thanks for being part of the TSA community <3`}
+              {`Thanks for being part of the CALF community <3`}
             </TYPE.subHeader>
           </AutoColumn>
           <AutoColumn style={{ zIndex: 10 }} justify="center">

@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getUserByIdAPI } from '../../../webAPI/userAPI';
 import {
-  getProductsAPI,
+  getProducCALFPI,
   getProductCategoriesAPI,
   getProductsFromCategoryAPI,
   getProductsFromVendorAPI,
@@ -73,7 +73,7 @@ export const {
 } = productSlice.actions;
 
 export const getProducts = (page) => (dispatch) => {
-  getProductsAPI(page).then((res) => {
+  getProducCALFPI(page).then((res) => {
     if (res.ok === 0) {
       if (typeof res.message === 'object') {
         return dispatch(setErrorMessage('something wrong'));

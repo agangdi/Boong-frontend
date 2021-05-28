@@ -114,19 +114,19 @@ export default function Menu() {
             <Send size={14} />
             Telegram
           </MenuItem>
-          <MenuItem id="link" href="https://www.instagram.com/artteaswap/">
+          <MenuItem id="link" href="https://www.instagram.com/artboong/">
             <MessageCircle size={14} />
             Instagram
           </MenuItem>
-          {/* <MenuItem id="link" href="http://teaswap-art.medium.com/">
+          {/* <MenuItem id="link" href="http://boong-art.medium.com/">
             <BookOpen size={14} />
             Medium
           </MenuItem> */}
-          <MenuItem id="link" href="https://twitter.com/ArtTeaswap">
+          <MenuItem id="link" href="https://twitter.com/Artboong">
             <Twitter size={14} />
             Twitter
           </MenuItem>
-          <MenuItem id="link" href="https://www.teaswap.live/news">
+          <MenuItem id="link" href="https://www.boong.live/news">
             <Info size={14} />
             {t('Announcement')}
           </MenuItem>

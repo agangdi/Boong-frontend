@@ -147,7 +147,7 @@ export const Products = ({
   $justify,
 }) => {
   const { loaded, onLoad } = useProduct();
-  const productsArray = useSelector(selectProducts);
+  const producCALFrray = useSelector(selectProducts);
   const productCount = useSelector(selectProductCount);
   return (
     <>
@@ -182,7 +182,7 @@ export const Products = ({
         </ProductsWrap>
       </ProductsContainer>
 
-      {productCount - productsArray.length <= 0 ? (
+      {productCount - producCALFrray.length <= 0 ? (
         <></>
       ) : (
         <>{handler && <MoreButton id={id} handler={handler} />}</>

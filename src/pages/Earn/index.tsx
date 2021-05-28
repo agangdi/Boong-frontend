@@ -104,14 +104,14 @@ export default function Earn() {
                 case 0:
                   break;
                 case 1:
-                  if (stakingInfo.tokens[1].symbol != 'TSA') return;
+                  if (stakingInfo.tokens[1].symbol != 'CALF') return;
                   break;
                 case 2:
-                  if (stakingInfo.tokens[0].symbol != 'TSA') return;
+                  if (stakingInfo.tokens[0].symbol != 'CALF') return;
                   break;
                 case 3:
-                  if (stakingInfo.tokens[0].symbol == 'TSA' && stakingInfo.tokens[1].symbol == 'CJAI') break;
-                  if (stakingInfo.tokens[0].symbol == 'CJAI' && stakingInfo.tokens[1].symbol == 'TSA') break;
+                  if (stakingInfo.tokens[0].symbol == 'CALF' && stakingInfo.tokens[1].symbol == 'CJAI') break;
+                  if (stakingInfo.tokens[0].symbol == 'CJAI' && stakingInfo.tokens[1].symbol == 'CALF') break;
                   if (stakingInfo.tokens[0].symbol == 'Shih' && stakingInfo.tokens[1].symbol == 'CJAI') break;
                   return;
                 case 4 :

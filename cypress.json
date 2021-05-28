@@ -1,5 +1,5 @@
 {
-  "baseUrl": "https://www.teaswap.art",
+  "baseUrl": "http://boong.shop",
   "pluginsFile": false,
   "fixturesFolder": false,
   "supportFile": "cypress/support/index.js",

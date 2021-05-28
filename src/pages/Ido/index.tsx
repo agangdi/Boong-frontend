@@ -270,12 +270,12 @@ const Index = ()=>{
           <div style={{lineHeight: '30px', fontSize: '15px'}}>Key terms for CJAI NFT Collectibles & Initial Art Offering ("IRO"): </div>
           <ol style={{fontSize: '15px', textAlign: 'left', lineHeight: "28px"}}>
             <li>​Total Edition of CaoJunNFT Collectibles released: 600</li>
-            <li>Total TSA released for CJAI IRO: 15,000,000</li>
-            <li>List TSA Token on TeaSwap, BakerySwap and SwapAll for trading and liquidity farming;</li>
-            <li>Able to stake TSA to earn CJAI and iCASH, Deposit TSA-BNB BLP to earn TSA, Deposit TSA-BUSD to earn TSA, and Deposit TSA-USDT BLP to earn TSA.</li>
-            <li>100,000 $TSA can be exchanged with 1 CaoJun NFT, and 1 CaoJun NFT can be converted into one exclusive physical CaoJun Limited Edition of NFT Collectible ("CaoJun NFT Collectible"). The NFT and $TSA will be burned afterward.</li>
-            <li>The CaoJun NFT will be available at the CaoJun NFT Collectibles (under NFT Broadway tab), and can only be purchased with $TSA</li>
-            <li>No minimum: Users can buy fractions of $TSA Offering for CaoJun NFT Collectibles</li>
+            <li>Total CALF released for CJAI IRO: 15,000,000</li>
+            <li>List CALF Token on boong, BakerySwap and SwapAll for trading and liquidity farming;</li>
+            <li>Able to stake CALF to earn CJAI and iCASH, Deposit CALF-BNB BLP to earn CALF, Deposit CALF-BUSD to earn CALF, and Deposit CALF-USDT BLP to earn CALF.</li>
+            <li>100,000 $CALF can be exchanged with 1 CaoJun NFT, and 1 CaoJun NFT can be converted into one exclusive physical CaoJun Limited Edition of NFT Collectible ("CaoJun NFT Collectible"). The NFT and $CALF will be burned afterward.</li>
+            <li>The CaoJun NFT will be available at the CaoJun NFT Collectibles (under NFT Broadway tab), and can only be purchased with $CALF</li>
+            <li>No minimum: Users can buy fractions of $CALF Offering for CaoJun NFT Collectibles</li>
           </ol>
           <div style={{lineHeight: '30px', fontSize: '15px'}}>  Details : 
             <ExternalLink href="https://www.caojunnft.com">
@@ -511,6 +511,6 @@ function IframeComponent(props: any) {
   );
 }
 
-const iframe = '<iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" style="margin-top: 30px; width: 100%; height: 100%; " src="https://www.youtube.com/embed/xa8OBoVx2yk?autoplay=0&amp;mute=0&amp;controls=1&amp;loop=0&amp;origin=https%3A%2F%2Fwww.teaswap.live&amp;playsinline=1&amp;enablejsapi=1&amp;widgetid=1" id="widget2"></iframe>'; 
+const iframe = '<iframe frameborder="0" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" title="YouTube video player" style="margin-top: 30px; width: 100%; height: 100%; " src="https://www.youtube.com/embed/xa8OBoVx2yk?autoplay=0&amp;mute=0&amp;controls=1&amp;loop=0&amp;origin=https%3A%2F%2Fwww.boong.live&amp;playsinline=1&amp;enablejsapi=1&amp;widgetid=1" id="widget2"></iframe>'; 
 
 export default Index;

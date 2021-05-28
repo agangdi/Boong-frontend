@@ -3,7 +3,7 @@ import React, { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { X } from 'react-feather'
 import styled from 'styled-components'
-import tokenLogo from '../../assets/images/teaswap-logo-single.png'
+import tokenLogo from '../../assets/images/boong-logo-single.png'
 import { UNI } from '../../constants'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { useActiveWeb3React } from '../../hooks'
@@ -107,11 +107,11 @@ export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowU
         <CardSection gap="sm">
           <AutoColumn gap="md">
             <RowBetween>
-              <TYPE.white color="white">TSA {t('price')}:</TYPE.white>
+              <TYPE.white color="white">CALF {t('price')}:</TYPE.white>
               <TYPE.white color="white">${uniPrice?.toFixed(2) ?? '-'}</TYPE.white>
             </RowBetween>
             <RowBetween>
-              <TYPE.white color="white">TSA in {t('circulation')}:</TYPE.white>
+              <TYPE.white color="white">CALF in {t('circulation')}:</TYPE.white>
               <TYPE.white color="white">{circulation?.toFixed(0, { groupSeparator: ',' })}</TYPE.white>
             </RowBetween>
             <RowBetween>

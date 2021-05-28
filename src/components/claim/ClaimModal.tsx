@@ -140,7 +140,7 @@ export default function ClaimModal() {
             <TYPE.subHeader fontWeight={500}>
               {t('as-a-member-of-the-uniswap-community-you-may-claim-best-to-be-used-for-voting-and-governance')}
               <br /> <br />
-              <ExternalLink href="https://www.teaswap.live/info">{t('readMoreAboutBest')}</ExternalLink>
+              <ExternalLink href="https://www.boong.live/info">{t('readMoreAboutBest')}</ExternalLink>
             </TYPE.subHeader>
             <ButtonPrimary
               disabled={!isAddress(account ?? '')}

@@ -115,7 +115,7 @@
       "symbol": "DOGE",
       "decimals": 8,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0xba2ae424d960c26247dd6c32edc70b295c744c43.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0xba2ae424d960c26247dd6c32edc70b295c744c43.png"
     },
     {
       "name": "Ontology Token",
@@ -643,7 +643,7 @@
       "symbol": "CAR",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x176a25637e5078519230a4d80a7a47350940264a.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x176a25637e5078519230a4d80a7a47350940264a.png"
     },
     {
       "name": "SOCCER",
@@ -651,7 +651,7 @@
       "symbol": "SOCCER",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x338d44d19c8d45ed9771b8d2b95d988f0e42187f.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x338d44d19c8d45ed9771b8d2b95d988f0e42187f.png"
     },
     {
       "name": "POKER",
@@ -659,7 +659,7 @@
       "symbol": "POKER",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x82caa54ec9aaf213ff611af63d4b650accff53ae.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x82caa54ec9aaf213ff611af63d4b650accff53ae.png"
     },
     {
       "name": "Pet Token",
@@ -667,7 +667,7 @@
       "symbol": "PET",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x4d4e595d643dc61ea7fcbf12e4b1aaa39f9975b8.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x4d4e595d643dc61ea7fcbf12e4b1aaa39f9975b8.png"
     },
     {
       "name": "Weapon Token",
@@ -675,7 +675,7 @@
       "symbol": "WEAPON",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x3664d30a612824617e3cf6935d6c762c8b476eda.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x3664d30a612824617e3cf6935d6c762c8b476eda.png"
     },
     {
       "name": "Binance-Peg Token Club",
@@ -683,7 +683,7 @@
       "symbol": "TCT",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0xca0a9df6a8cad800046c1ddc5755810718b65c44.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0xca0a9df6a8cad800046c1ddc5755810718b65c44.png"
     },
     {
       "name": "SafeMoon",
@@ -691,7 +691,7 @@
       "symbol": "SAFEMOON",
       "decimals": 9,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3.png"
     },
     {
       "name": "Shiba Inu",
@@ -699,7 +699,7 @@
       "symbol": "SHIB",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0xf09a100c32d780f0a48754e43533f9fb374e85f9.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0xf09a100c32d780f0a48754e43533f9fb374e85f9.png"
     },
     {
       "name": "Shih Tzu",
@@ -707,7 +707,7 @@
       "symbol": "Shih",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x36ac9eaf028c175d62e086945862924e4ba7516f.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x36ac9eaf028c175d62e086945862924e4ba7516f.png"
     },
     {
       "name": "iCashToken.io",
@@ -715,7 +715,7 @@
       "symbol": "iCash",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x3668a68140a103947c83ef43333fe4711d59ba9f.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x3668a68140a103947c83ef43333fe4711d59ba9f.png"
     },
     {
       "name": "DOGGY",
@@ -723,15 +723,15 @@
       "symbol": "DOGGY",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x74926b3d118a63f6958922d3dc05eb9c6e6e00c6.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x74926b3d118a63f6958922d3dc05eb9c6e6e00c6.png"
     },
     {
-      "name": "TEAsWAP.ART",
+      "name": "boong.ART",
       "address": "0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b",
-      "symbol": "TSA",
+      "symbol": "CALF",
       "decimals": 18,
       "chainId": 56,
-      "logoURI": "https://www.teaswap.art/default-token-list/images/0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b.png"
+      "logoURI": "http://boong.shop/default-token-list/images/0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b.png"
     }
   ]
 

@@ -68,9 +68,9 @@ const List = ()=>{
     {
       image: GridImg3,
       Learn: "https://www.caojunnft.com/",
-      author: "The Art of TEAsWAP",
+      author: "The Art of boong",
       medium: "",
-      info: "TSA is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
+      info: "CALF is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
       joinUs: "#",
       end:undefined,
       duration:undefined,
@@ -79,9 +79,9 @@ const List = ()=>{
     // {
     //   image: GridImg3,
     //   Learn: "/",
-    //   author: "The Art of TEAsWAP",
-    //   medium: "https://teaswap-art.medium.com/tsa-airdrop-phase-1-f255e5be3f4f",
-    //   info: "TSA is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
+    //   author: "The Art of boong",
+    //   medium: "https://boong-art.medium.com/CALF-airdrop-phase-1-f255e5be3f4f",
+    //   info: "CALF is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
     //   joinUs: "#",
     //   sign: EndedImg
     // }

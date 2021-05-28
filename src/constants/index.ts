@@ -57,8 +57,8 @@ export const UNI: { [chainId in ChainId]: Token } = {
     ChainId.BSC_MAINNET,
     '0x5f99acf13caff815dd9cb4a415c0fb34e9f4545b',
     18,
-    'TSA',
-    'TEAsWap.ART'
+    'CALF',
+    'boong.ART'
   ),
   [ChainId.BSC_TESTNET]: new Token(
     ChainId.BSC_TESTNET,
@@ -75,20 +75,20 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.BSC_MAINNET]:'0x4261c6440CCC38768fd255D0a8036AE0d40bfdae'
 }
 
-export const USDT_TSA_LP = new Token(
+export const USDT_CALF_LP = new Token(
   ChainId.BSC_MAINNET,
   '0xcedeebd6127b65bb4b56d86b92eb4dd9bf28988a',
   18,
   'U_T_BLP',
-  'USDT_TSA_LP'
+  'USDT_CALF_LP'
 )
 
-export const ETH_TSA_LP = new Token(
+export const ETH_CALF_LP = new Token(
   ChainId.BSC_MAINNET,
   '0xc31173132a36c2453693d9e46d776d4b669b158f',
   18,
   'E_T_BLP',
-  'ETH_TSA_LP'
+  'ETH_CALF_LP'
 )
 
 export const BNB_BAKE_LP = new Token(

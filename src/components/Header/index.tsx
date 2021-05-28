@@ -310,10 +310,10 @@ export default function Header() {
               {/* <span>↗</span> */}
             </StyledNavLink>
             <StyledNavLink id={`Incubator-nav-link`} to={'/iro'}>
-              {t('Trade')}
+              {t('IDO')}
             </StyledNavLink>
             <StyledNavLink id={`Earn-nav-link`} to={'/stake'}>
-              {t('EarningTrade')}
+              {t('Farm')}
             </StyledNavLink>
             <StyledNavLink to="/blindbox">
               {t('BlindBox')}
@@ -360,7 +360,7 @@ export default function Header() {
                       </TYPE.gray>
                     </HideSmall>
                   )}
-                  TSA
+                  CALF
                 </UNIAmount>
                 <CardNoise />
               </UNIWrapper>

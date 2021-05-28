@@ -1,6 +1,6 @@
 import { BASE_URL } from '../constants/unit';
 
-const getUnCheckProductsAPI = (page) => {
+const getUnCheckProducCALFPI = (page) => {
   const token = localStorage.getItem('token');
   const currentPage = page || 1;
   return fetch(`${BASE_URL}/products?_page=${currentPage}&_status=checking`, {
@@ -54,7 +54,7 @@ const updateProductStatusAPI = (id, status) => {
   }).then((res) => res.json());
 };
 
-const getProductsAPI = (params) => {
+const getProducCALFPI = (params) => {
   const token = localStorage.getItem('token');
   const queryString = `_offset=${params.offset ? params.offset : 0}&_limit=${
     params.limit ? params.limit : ''
@@ -68,7 +68,7 @@ const getProductsAPI = (params) => {
   }).then((res) => res.json());
 };
 
-const searchProductsAPI = (params) => {
+const searchProducCALFPI = (params) => {
   const token = localStorage.getItem('token');
   const queryString = `_keyword=${params.keyword}&_page=${
     params.page ? params.page : 1
@@ -94,11 +94,11 @@ const getMailsAPI = () => {
 };
 
 export {
-  getUnCheckProductsAPI,
+  getUnCheckProducCALFPI,
   updateProductStatusAPI,
   getUsersAPI,
   searchUsersAPI,
-  getProductsAPI,
-  searchProductsAPI,
+  getProducCALFPI,
+  searchProducCALFPI,
   getMailsAPI,
 };

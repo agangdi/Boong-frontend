@@ -51,7 +51,7 @@ import { filterTokens } from '../../components/SearchModal/filtering'
 import { useAllTokens } from '../../hooks/Tokens'
 import { MEDIA_QUERY } from '../../constants/style'
 
-// import SwapLogo from '../../assets/images/TEAsWAP.jpeg'
+// import SwapLogo from '../../assets/images/boong.jpeg'
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -276,7 +276,7 @@ export default function Swap() {
   // filter token, search BEST
   const allTokens = useAllTokens()
   const filteredTokens: Token[] = useMemo(() => {
-    return filterTokens(Object.values(allTokens), 'TSA')
+    return filterTokens(Object.values(allTokens), 'CALF')
   }, [allTokens])
 
   // set OUTPUT for BEST Token
