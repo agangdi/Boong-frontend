@@ -31,7 +31,7 @@ import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../s
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useIsExpertMode, useUserSlippageTolerance } from '../../state/user/hooks'
 import { TYPE } from '../../theme'
-import {calculateGasMargin, calculateSlippageAmount, getCALFRouterContract} from '../../utils'
+import {calculateGasMargin, calculateSlippageAmount, getBCRouterContract} from '../../utils'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import AppBody from '../AppBody'
@@ -132,7 +132,7 @@ const AddLiquidity = () => {
 
   async function onAdd() {
     if (!chainId || !library || !account) return
-    const router = getCALFRouterContract(chainId, library, account)
+    const router = getBCRouterContract(chainId, library, account)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {

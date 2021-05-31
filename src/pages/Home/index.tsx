@@ -25,6 +25,9 @@ const Con = styled.div`
 const Products = styled(Con)`
   grid-template-columns: repeat(3, 1fr);
   margin-top: 30px;
+  ${MEDIA_QUERY.sm} {
+    grid-template-columns: auto;
+  }
 `
 
 const Product = styled.img`
@@ -37,6 +40,9 @@ const Artists = styled(Con)`
   grid-template-columns: repeat(4, 1fr);
   margin-top: 30px;
   padding-bottom: 30px;
+  ${MEDIA_QUERY.sm} {
+    grid-template-columns: auto;
+  }
 `
 
 const Artist = styled.div`
@@ -69,6 +75,9 @@ const Talents = styled(Con)`
   grid-template-columns: repeat(3, 1fr);
   margin-top: 30px;
   padding-bottom: 30px;
+  ${MEDIA_QUERY.sm} {
+    grid-template-columns: auto;
+  }
 `
 
 
@@ -95,19 +104,19 @@ export default function Home() {
   const artists = [
     {
       pic: process.env.PUBLIC_URL + '/home/profile01.png',
-      name: 'ASksjdkg'
+      name: '拭目以待'
     },
     {
       pic: process.env.PUBLIC_URL + '/home/profile02.png',
-      name: 'HRISSLEU'
+      name: '拭目以待'
     },
     {
       pic: process.env.PUBLIC_URL + '/home/profile03.png',
-      name: 'BLLOJYU'
+      name: '拭目以待'
     },
     {
       pic: process.env.PUBLIC_URL + '/home/profile04.png',
-      name: 'DISCOVER'
+      name: '拭目以待'
     },
   ]
   const galleries = [
@@ -151,23 +160,25 @@ export default function Home() {
   return (
     <PageWrapper>
       <img width="100%" src={process.env.PUBLIC_URL + '/Banner.png'} alt="" /> 
-      <div className="page-title">Product Introduction</div>
+      <div className="page-title"></div>
       <Con className="page-desc">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra .
+      我们将会引领整个NFT与知名ip的全新玩法，缔造一个全新的潮流领域，这一定会是一个全民参与的独角兽NFT平台。
       </Con>
       <Products className="grid-container">
         {products.map((v, i) => {
           return <Product key={'pic' + i} src={v.pic} alt="" />
         })}
       </Products>
-      <div className="page-title">Featured Artists</div>
+      <div className="page-title"></div>
       <Con style={{textAlign: "center"}} className="page-desc">
-      Discover our selection of top talented artists and their exclusive artworks.
+        <p>我们对外招募各大知名艺术家入驻平台</p>
+        <p>我们有很好的主题和很好的NFT发行渠道，也可以根据我们的知名ip做联合发行创作。</p>
+
       </Con>
       <Artists className="grid-container">
         {artists.map((v, i) => {
           return <Artist key={"art" + i}>
-                  <img src={v.pic} alt="" />
+                  <img style={{filter: 'blur(18px)'}} src={v.pic} alt="" />
                   <ArtistName>{v.name}</ArtistName>
                 </Artist>
         })}

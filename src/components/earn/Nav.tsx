@@ -14,11 +14,11 @@ const Nav = (props: any) => {
       </StyledLink>
       <StyledLink style={{padding:"0 14px"}}> </StyledLink>
       <StyledLink onClick={() => props.handleCatChange(1)}>
-        Earn CALF
+        Earn BC
       </StyledLink>
       <StyledLink style={{padding:"0 14px"}}> </StyledLink>
       <StyledLink onClick={() => props.handleCatChange(2)}>
-        CALF Staking
+        BC Staking
       </StyledLink>
       <StyledLink style={{padding:"0 14px"}}> </StyledLink>
       <StyledLink onClick={() => props.handleCatChange(3)}>

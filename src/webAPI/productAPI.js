@@ -19,7 +19,7 @@ function changeProductSort(queue) {
   return { sort, order };
 }
 
-const getProducCALFPI = (page) => {
+const getProducBCPI = (page) => {
   return fetch(`${BASE_URL}/products?_page=${page}`).then((res) => res.json());
 };
 
@@ -152,7 +152,7 @@ const postPictureAPI = (formData) => {
 };
 
 export {
-  getProducCALFPI,
+  getProducBCPI,
   getProductCategoriesAPI,
   getProductsFromCategoryAPI,
   getProductsFromVendorAPI,

@@ -3,7 +3,7 @@ import { getAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
-import { abi as CALFRouterABI  } from "../constants/abis/CALFswapRouter.json";
+import { abi as BCRouterABI  } from "../constants/abis/BCswapRouter.json";
 import { ROUTER_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@teaswap/uniswap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
@@ -102,11 +102,11 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS, CALFRouterABI, library, account)
+  return getContract(ROUTER_ADDRESS, BCRouterABI, library, account)
 }
 
-export function getCALFRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS, CALFRouterABI, library, account)
+export function getBCRouterContract(chainId: number, library: Web3Provider, account?: string): Contract {
+  return getContract(ROUTER_ADDRESS, BCRouterABI, library, account)
 }
 
 // export function getIDOContract(address:string, library: Web3Provider, account?: string): Contract {

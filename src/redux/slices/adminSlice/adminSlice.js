@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  getUnCheckProducCALFPI,
+  getUnCheckProducBCPI,
   updateProductStatusAPI,
   getUsersAPI,
   searchUsersAPI,
-  getProducCALFPI,
-  searchProducCALFPI,
+  getProducBCPI,
+  searchProducBCPI,
   getMailsAPI,
 } from '../../../webAPI/adminAPI';
 
@@ -53,7 +53,7 @@ export const {
 export const getUnCheckProducts = (page) => (dispatch) => {
   dispatch(setProducts([]));
   dispatch(setErrorMessage(''));
-  return getUnCheckProducCALFPI(page).then((result) => {
+  return getUnCheckProducBCPI(page).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
@@ -102,7 +102,7 @@ export const searchUsers = (keyword) => (dispatch) => {
 
 export const getProducts = (params) => (dispatch) => {
   dispatch(setErrorMessage(''));
-  return getProducCALFPI(params).then((result) => {
+  return getProducBCPI(params).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
@@ -115,7 +115,7 @@ export const getProducts = (params) => (dispatch) => {
 
 export const searchProducts = (params) => (dispatch) => {
   dispatch(setErrorMessage(''));
-  return searchProducCALFPI(params).then((result) => {
+  return searchProducBCPI(params).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')

@@ -4,16 +4,11 @@ import styled from 'styled-components'
 import ConTitle from '../../components/Content/Title'
 import {MEDIA_QUERY} from '../../constants/style';
 
-import GridImg1 from '../../assets/images/IMG_6362_JPG.jpeg'
-import GridImg2 from '../../assets/images/grid_img2.webp'
-import GridImg3 from '../../assets/images/grid_img3.webp'
+import GridImg3 from '../../assets/images/grid_img3.png'
 import MediumImg from '../../assets/images/read_medium.jpeg'
 import { ExternalLink } from '../../theme'
 
 
-import EndedImg from '../../assets/images/sign/ended.jpg'
-import NewImg from '../../assets/images/sign/new.webp'
-import ComingImg from '../../assets/images/sign/coming.webp'
 
 import IncubatorBox from '../../components/general/IncubatorBox'
 import { ButtonPrimary } from '../../components/Button'
@@ -42,46 +37,21 @@ const List = ()=>{
   console.log(t('tokensAvailable'), useTranslation())
   const products = [
     {
-      image: GridImg1,
-      Learn: "https://www.caojunnft.com/",
-      author: "Cao Jun NFT Collectibles",
-      medium: "",
-      info: "CaoJun limited edition of NFT Collectibles.",
-      joinUs: "/iro/bnb/0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b/0xF72ECaD992CebB0138aC13b616199f131F847b04",
-      when: "When: 05.25 16:00 UTC",
-      end:new Date(1622217600000),
-      duration:259200,
-      sign: NewImg
-    },
-    {
-      image: GridImg2,
-      Learn: "https://www.caojunnft.com/",
-      author: "Gus Bawab NFTs",
-      medium: "",
-      info: "We are proud that his work “Persistence” found its way to the Elysee, the French presidential Palace in 2016.",
-      joinUs: "#",
-      when: "When: TBD",
-      end:new Date(1721958400000),
-      duration:3600,
-      sign: ComingImg
-    },
-    {
       image: GridImg3,
       Learn: "https://www.caojunnft.com/",
       author: "The Art of boong",
       medium: "",
-      info: "CALF is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
+      info: "Boong is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
       joinUs: "#",
       end:undefined,
-      duration:undefined,
-      sign: EndedImg
+      duration:undefined
     },
     // {
     //   image: GridImg3,
     //   Learn: "/",
     //   author: "The Art of boong",
-    //   medium: "https://boong-art.medium.com/CALF-airdrop-phase-1-f255e5be3f4f",
-    //   info: "CALF is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
+    //   medium: "https://boong-art.medium.com/BC-airdrop-phase-1-f255e5be3f4f",
+    //   info: "BC is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
     //   joinUs: "#",
     //   sign: EndedImg
     // }
@@ -115,24 +85,12 @@ const List = ()=>{
                 </Read>
                 <Spe></Spe>
                 <Info>{v.info}</Info>
-                <div>
-                  {v.when && (v.when)}
-                </div>
                 <Countdown exactEnd={v.end} rewardsDuration={v.duration?v.duration:1000} />
                 <StyledLink to={v.joinUs}>
                   <JoinUs>
                     {"Join Us"}
                   </JoinUs>
                 </StyledLink>
-                <img 
-                  style={{
-                    position: 'absolute',
-                    top: '15px',
-                    right: '5px'
-                  }}
-                  width="50"
-                  src={v.sign}
-                  />
               </Grid>
             )
           })

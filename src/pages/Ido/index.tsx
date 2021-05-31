@@ -270,12 +270,12 @@ const Index = ()=>{
           <div style={{lineHeight: '30px', fontSize: '15px'}}>Key terms for CJAI NFT Collectibles & Initial Art Offering ("IRO"): </div>
           <ol style={{fontSize: '15px', textAlign: 'left', lineHeight: "28px"}}>
             <li>​Total Edition of CaoJunNFT Collectibles released: 600</li>
-            <li>Total CALF released for CJAI IRO: 15,000,000</li>
-            <li>List CALF Token on boong, BakerySwap and SwapAll for trading and liquidity farming;</li>
-            <li>Able to stake CALF to earn CJAI and iCASH, Deposit CALF-BNB BLP to earn CALF, Deposit CALF-BUSD to earn CALF, and Deposit CALF-USDT BLP to earn CALF.</li>
-            <li>100,000 $CALF can be exchanged with 1 CaoJun NFT, and 1 CaoJun NFT can be converted into one exclusive physical CaoJun Limited Edition of NFT Collectible ("CaoJun NFT Collectible"). The NFT and $CALF will be burned afterward.</li>
-            <li>The CaoJun NFT will be available at the CaoJun NFT Collectibles (under NFT Broadway tab), and can only be purchased with $CALF</li>
-            <li>No minimum: Users can buy fractions of $CALF Offering for CaoJun NFT Collectibles</li>
+            <li>Total BC released for CJAI IRO: 15,000,000</li>
+            <li>List BC Token on boong, BakerySwap and SwapAll for trading and liquidity farming;</li>
+            <li>Able to stake BC to earn CJAI and iCASH, Deposit BC-BNB BLP to earn BC, Deposit BC-BUSD to earn BC, and Deposit BC-USDT BLP to earn BC.</li>
+            <li>100,000 $BC can be exchanged with 1 CaoJun NFT, and 1 CaoJun NFT can be converted into one exclusive physical CaoJun Limited Edition of NFT Collectible ("CaoJun NFT Collectible"). The NFT and $BC will be burned afterward.</li>
+            <li>The CaoJun NFT will be available at the CaoJun NFT Collectibles (under NFT Broadway tab), and can only be purchased with $BC</li>
+            <li>No minimum: Users can buy fractions of $BC Offering for CaoJun NFT Collectibles</li>
           </ol>
           <div style={{lineHeight: '30px', fontSize: '15px'}}>  Details : 
             <ExternalLink href="https://www.caojunnft.com">

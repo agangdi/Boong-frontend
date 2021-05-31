@@ -9679,7 +9679,7 @@ is-installed-globally@^0.3.2:
 is-installed-globally@~0.4.0:
   version "0.4.0"
   resolved "https://registry.npm.taobao.org/is-installed-globally/download/is-installed-globally-0.4.0.tgz?cache=0&sync_timestamp=1610875307109&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fis-installed-globally%2Fdownload%2Fis-installed-globally-0.4.0.tgz#9a0fd407949c30f86eb6959ef1b7994ed0b7b520"
-  integrity sha1-mg/UB5ScMPhutpWe8beZTtC3CALF=
+  integrity sha1-mg/UB5ScMPhutpWe8beZTtC3BC=
   dependencies:
     global-dirs "^3.0.0"
     is-path-inside "^3.0.2"
@@ -10375,7 +10375,7 @@ jest-worker@^25.4.0:
 jest@24.9.0:
   version "24.9.0"
   resolved "https://registry.npm.taobao.org/jest/download/jest-24.9.0.tgz?cache=0&sync_timestamp=1618268336309&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjest%2Fdownload%2Fjest-24.9.0.tgz#987d290c05a08b52c56188c1002e368edb007171"
-  integrity sha1-mH0pDAWgi1LFYYjBAC42jCALFcXE=
+  integrity sha1-mH0pDAWgi1LFYYjBAC42jBCcXE=
   dependencies:
     import-local "^2.0.0"
     jest-cli "^24.9.0"
@@ -14809,7 +14809,7 @@ safe-regex@^1.1.0:
 sane@^4.0.3:
   version "4.1.0"
   resolved "https://registry.npm.taobao.org/sane/download/sane-4.1.0.tgz#ed881fd922733a6c461bc189dc2b6c006f3ffded"
-  integrity sha1-7Ygf2SJzOmxGG8GJ3CCALFG8//e0=
+  integrity sha1-7Ygf2SJzOmxGG8GJ3CBCG8//e0=
   dependencies:
     "@cnakazawa/watch" "^1.0.3"
     anymatch "^2.0.0"

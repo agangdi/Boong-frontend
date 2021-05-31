@@ -728,7 +728,7 @@
     {
       "name": "boong.ART",
       "address": "0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b",
-      "symbol": "CALF",
+      "symbol": "BC",
       "decimals": 18,
       "chainId": 56,
       "logoURI": "http://boong.shop/default-token-list/images/0x5f99ACF13CAff815DD9cB4A415c0fB34e9F4545b.png"

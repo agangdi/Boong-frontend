@@ -22,7 +22,7 @@ const Farms: React.FC = () => {
     <>
         {account ? (
           <>
-              <PageHeader title="Stake tokens to earn CALF" subtitle="" />
+              <PageHeader title="Stake tokens to earn BC" subtitle="" />
               <FarmCards />
           </>
 

@@ -360,7 +360,7 @@ export default function Header() {
                       </TYPE.gray>
                     </HideSmall>
                   )}
-                  CALF
+                  BC
                 </UNIAmount>
                 <CardNoise />
               </UNIWrapper>
