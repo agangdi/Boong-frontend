@@ -159,7 +159,7 @@ export default function Home() {
   ]
   return (
     <PageWrapper>
-      <img width="100%" src={process.env.PUBLIC_URL + '/Banner.png'} alt="" /> 
+      {/* <img width="100%" src={process.env.PUBLIC_URL + '/Banner.png'} alt="" />  */}
       <div className="page-title"></div>
       <Con className="page-desc">
       我们将会引领整个NFT与知名ip的全新玩法，缔造一个全新的潮流领域，这一定会是一个全民参与的独角兽NFT平台。
@@ -178,7 +178,7 @@ export default function Home() {
       <Artists className="grid-container">
         {artists.map((v, i) => {
           return <Artist key={"art" + i}>
-                  <img style={{filter: 'blur(18px)'}} src={v.pic} alt="" />
+                  <img style={{filter: 'blur(0)'}} src={v.pic} alt="" />
                   <ArtistName>{v.name}</ArtistName>
                 </Artist>
         })}

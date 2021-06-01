@@ -136,13 +136,13 @@ const HomePage = () => {
 
   return (
     <Page>
-      <Banner>
+      {/* <Banner>
         <img width="100%" src={process.env.PUBLIC_URL + "/NFT_MarketPlace/bg_pictures.png"} />
         <BannerText>
           <BannerText1>Marketplace</BannerText1>
           <BannerText2>A market made for NFT where everything is special</BannerText2>
         </BannerText>
-      </Banner>
+      </Banner> */}
       <Navbar />
       <Section>
         {/* <Title $isLarge>{t('NEW POST')}</Title> */}

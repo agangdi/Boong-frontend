@@ -12,7 +12,7 @@ const NavSocial: React.FC = () => {
   return (
     <StyledNav>
 
-      <StyledLink target="_blank" href="https://twitter.com/">
+      <StyledLink target="_blank" href="https://twitter.com/boong_org?s=09">
         <img src={twitterIcon}  width="31" height="31" />
       </StyledLink>
       <StyledLink target="_blank" href="https://facetime.com/">
@@ -21,7 +21,7 @@ const NavSocial: React.FC = () => {
       <StyledLink target="_blank" href="">
         <img src={githubIcon}  width="31" height="31" />
       </StyledLink>
-      <StyledLink target="_blank" href="">
+      <StyledLink target="_blank" href="https://t.me/joinchat/4FnBePnIwrUwYTJl">
         <img src={telegramIcon}  width="31" height="31" />
       </StyledLink>
       <StyledLink target="_blank" href="">

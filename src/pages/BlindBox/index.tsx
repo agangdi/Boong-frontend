@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <PageWrapper>
       <div className="page-title">盲盒</div>
-      <div className="page-subtitle">盲盒是我们结合知名ip的nft作品的一个很好的玩法! </div>
+      <div className="page-desc">盲盒是我们结合知名IP的NFT作品的一个很好的玩法! </div>
       <Products className="grid-container">
         {products.map((v, i) => {
           return <Product key={'pic' + i} src={v.pic} alt="" />

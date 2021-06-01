@@ -6,7 +6,7 @@ import {MEDIA_QUERY} from '../../constants/style';
 
 import GridImg3 from '../../assets/images/grid_img3.png'
 import MediumImg from '../../assets/images/read_medium.jpeg'
-import { ExternalLink } from '../../theme'
+// import { ExternalLink } from '../../theme'
 
 
 
@@ -38,7 +38,7 @@ const List = ()=>{
   const products = [
     {
       image: GridImg3,
-      Learn: "https://www.caojunnft.com/",
+      Learn: "",
       author: "The Art of boong",
       medium: "",
       info: "Boong is where we bring together creators, collectors, curators, influencers, brokers, wallets, auctioneers around the world to the NFT digital space.",
@@ -67,13 +67,6 @@ const List = ()=>{
             return (
               <Grid key={i}>
                 <img  width="100%" src={v.image}/>
-                <Learn>
-                  <ExternalLink href={v.Learn}>
-                    <Learn>
-                      {"Learn >"}
-                    </Learn>
-                  </ExternalLink>
-                </Learn>
                 <Read>
                   <span>{v.author}</span>
                   <span>
@@ -147,14 +140,6 @@ const Grid = styled(ColumnCenter)`
   ${MEDIA_QUERY.sm} {
     margin-left: 0;
   }
-`
-
-const Learn = styled.span`
-  color: #000000;
-  font-size: 15px;
-  margin-top: 6px;
-  font-weight: bold;
-  align-self: center;
 `
 
 const Read = styled(ColumnCenter)`
