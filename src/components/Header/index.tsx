@@ -300,7 +300,8 @@ export default function Header() {
           <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
         </Modal>
         <HeaderRow>
-          <div className="gradient-text">BOONG</div>
+          {/* <div className="gradient-text">BOONG</div> */}
+          <img src={process.env.PUBLIC_URL + '/logo.png'} width="180" />
           <HeaderLinks style={{ fontSize: '14px', marginLeft: '39px' }}>
             <StyledNavLink id={`swap-nav-link`} to={'/home'}>
               {t('Home')}

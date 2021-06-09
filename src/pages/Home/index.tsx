@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { MEDIA_QUERY } from '../../constants/style';
 import TalentDiv from '../../components/Card/Talent'
 
@@ -87,7 +87,7 @@ const MoreBtn = styled.span`
 
 export default function Home() {
 
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
 
   const products = [
     {
@@ -162,7 +162,7 @@ export default function Home() {
       {/* <img width="100%" src={process.env.PUBLIC_URL + '/Banner.png'} alt="" />  */}
       <div className="page-title"></div>
       <Con className="page-desc">
-      我们将会引领整个NFT与知名ip的全新玩法，缔造一个全新的潮流领域，这一定会是一个全民参与的独角兽NFT平台。
+      {t(`We will lead the whole NFT and well-known IP a new way to play, create a new trend field, this will be a unicorn NFT platform for all to participate.`)}
       </Con>
       <Products className="grid-container">
         {products.map((v, i) => {
@@ -170,9 +170,8 @@ export default function Home() {
         })}
       </Products>
       <div className="page-title"></div>
-      <Con style={{textAlign: "center"}} className="page-desc">
-        <p>我们对外招募各大知名艺术家入驻平台</p>
-        <p>我们有很好的主题和很好的NFT发行渠道，也可以根据我们的知名ip做联合发行创作。</p>
+      <Con className="page-desc">
+        {t("We externally recruit major famous artists to the platform. We have well-selected theme and very good NFT distribution channels, as well as our well-known IP to do joint distribution creation.")}
 
       </Con>
       <Artists className="grid-container">

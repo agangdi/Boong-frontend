@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { MEDIA_QUERY } from '../../constants/style';
 
 
@@ -32,7 +32,7 @@ const Product = styled.img`
 `
 export default function Home() {
 
-  // const { t } = useTranslation()
+  const { t } = useTranslation()
 
   const products = [
     {
@@ -48,8 +48,8 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <div className="page-title">盲盒</div>
-      <div className="page-desc">盲盒是我们结合知名IP的NFT作品的一个很好的玩法! </div>
+      <div className="page-title">{t("Blind box")}</div>
+      <div className="page-desc">{t("Blind box is a particularly fun way to play")} </div>
       <Products className="grid-container">
         {products.map((v, i) => {
           return <Product key={'pic' + i} src={v.pic} alt="" />
@@ -57,7 +57,7 @@ export default function Home() {
       </Products>
       <div className="page-title"></div>
       <Con className="page-desc">
-盲盒是一种特别好玩的玩法，我们将会拿一些我们独家授权的IP制作成nft产品，期待我们推出的第一个盲盒产品吧！
+        {t("we will take some of our exclusive licensed IPs to make NFT products, please look forward to the launch of our first blind box product")}
       </Con>
 
       <div style={{marginBottom: '200px', marginTop: '50px'}} className="page-title2">Coming Soon!!</div>
