@@ -21,10 +21,10 @@ const NavSocial: React.FC = () => {
       <StyledLink target="_blank" href="">
         <img src={githubIcon}  width="31" height="31" />
       </StyledLink>
-      <StyledLink target="_blank" href="https://t.me/joinchat/4FnBePnIwrUwYTJl">
+      <StyledLink target="_blank" href="https://t.me/boongnft">
         <img src={telegramIcon}  width="31" height="31" />
       </StyledLink>
-      <StyledLink target="_blank" href="">
+      <StyledLink target="_blank" href="https://medium.com/@boong_org">
         <img src={mediumIcon}  width="31" height="31" />
       </StyledLink>
       <StyledLink target="_blank" href="">

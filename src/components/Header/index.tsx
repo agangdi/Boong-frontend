@@ -29,6 +29,7 @@ import Modal from '../Modal'
 import UniBalanceContent from './UniBalanceContent'
 import usePrevious from '../../hooks/usePrevious'
 import I18nSwitch from '../I18nSwitch'
+import { MEDIA_QUERY } from '../../constants/style'
 // import { ButtonSecondary } from '../Button'
 
 const HeaderFrame = styled.div`
@@ -112,6 +113,11 @@ const HeaderRow = styled(RowFixed)`
     flex-direction: column;
     align-items: flex-start;
   }
+  ${MEDIA_QUERY.sm} {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 `
 
 const HeaderLinks = styled(Row)`
@@ -121,6 +127,9 @@ const HeaderLinks = styled(Row)`
     padding: 6px 0;
     justify-content: flex-start;
 `};
+ ${MEDIA_QUERY.sm} {
+   margin-left: 10px !important;
+ }
 `
 
 const AccountElement = styled.div<{ active: boolean }>`
@@ -224,6 +233,9 @@ const StyledNavLink = styled(NavLink).attrs({
     margin: 0 24px 0 0;
     font-size: 14px;
   }
+  ${MEDIA_QUERY.sm} {
+    margin: 0 10px 0 0;
+  }
 `
 // const Web3StatusGeneric = styled(ButtonSecondary)`
 //   ${({ theme }) => theme.flexRowNoWrap}
@@ -301,17 +313,17 @@ export default function Header() {
         </Modal>
         <HeaderRow>
           {/* <div className="gradient-text">BOONG</div> */}
-          <img src={process.env.PUBLIC_URL + '/logo.png'} width="180" />
+          <img src={process.env.PUBLIC_URL + '/logo.png'} width="80" />
           <HeaderLinks style={{ fontSize: '14px', marginLeft: '39px' }}>
             <StyledNavLink id={`swap-nav-link`} to={'/home'}>
               {t('Home')}
             </StyledNavLink>
             <StyledNavLink id={`NFT-nav-link`} to={'/nft'} >
-              {t('NFT Marketplace')}
+              {t('NFT')}
               {/* <span>↗</span> */}
             </StyledNavLink>
             <StyledNavLink id={`Incubator-nav-link`} to={'/iro'}>
-              {t('IDO')}
+              {t('Iro')}
             </StyledNavLink>
             <StyledNavLink id={`Earn-nav-link`} to={'/stake'}>
               {t('Farm')}
