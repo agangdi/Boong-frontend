@@ -323,7 +323,7 @@ export default function Header() {
               {/* <span>↗</span> */}
             </StyledNavLink>
             <StyledNavLink id={`Incubator-nav-link`} to={'/iro'}>
-              {t('Iro')}
+              {t('IRO')}
             </StyledNavLink>
             <StyledNavLink id={`Earn-nav-link`} to={'/stake'}>
               {t('Farm')}
