@@ -331,6 +331,9 @@ export default function Header() {
             <StyledNavLink to="/blindbox">
               {t('BlindBox')}
             </StyledNavLink>
+            <StyledNavLink to="/mint">
+              {t('Mint')}
+            </StyledNavLink>
           </HeaderLinks>
         </HeaderRow>
         <HeaderControls style={{fontSize: '14px'}}>
