@@ -7,20 +7,23 @@ import {
   updateProduct,
 } from '../../redux/slices/productSlice/productSlice';
 import { useTranslation } from 'react-i18next'
+import {MintInfoInterface} from "../useMintCallback";
 
 export default function useProductForm(id) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [productName, setProductName] = useState('');
   const [productInfo, setProductInfo] = useState('');
-  const [productCategory, setProductCategory] = useState('');
+  const [productCategory, setProductCategory] = useState(0);
   const [productPictureUrl, setProductPictureUrl] = useState(
     'https://i.imgur.com/uqZxFCm.png'
   );
-  const [productPrice, setProductPrice] = useState('');
+  const [productRoyalty, setProductRoyalty] = useState(0);
+  const [productMediaType, setProductMediaType] = useState('');
+  const [productPrice, setProductPrice] = useState(0);
   const [deliveryTime, setDeliveryTime] = useState('');
-  const [deliveryLocation, setDeliveryLocation] = useState('台灣');
-  const [delivery, setDelivery] = useState('');
+  const [deliveryLocation, setDeliveryLocation] = useState('');
+  const [delivery, setDelivery] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState('');
   const [remark, setRemark] = useState('');
   const [productQuantity, setProductQuantity] = useState('');
@@ -29,6 +32,10 @@ export default function useProductForm(id) {
   const [hasProductName, setHasProductName] = useState('');
   const [hasProductInfo, setHasProductInfo] = useState('');
   const [hasProductCategory, setHasProductCategory] = useState('');
+  const [hasProductToken, setHasProductToken] = useState('');
+  const [productToken, setProductToken] = useState('');
+  const [hasProductRoyalty, setHasProductRoyalty] = useState('');
+  const [hasProductMediaType, setHasProductMediaType] = useState('');
   const [hasDeliveryLocation, setHasDeliveryLocation] = useState('');
   const [hasProductPrice, setHasProductPrice] = useState('');
   const [hasDeliveryTime, setHasDeliveryTime] = useState('');
@@ -36,13 +43,17 @@ export default function useProductForm(id) {
   const [hasPaymentMethod, setHasPaymentMethod] = useState('');
   const [hasProductQuantity, setHasProductQuantity] = useState('');
 
+
   let hasError = false;
 
-  const handleChange = (setValue) => (e) => setValue(e.target.value);
+  const handleChange = (setValue) => (e) => {
+    console.log(e, e.target.value)
+    setValue(e.target.value)
+  };
 
   const checkValidNumber = (input, max, min) => {
     const num = Number(input);
-    if (!Number.isInteger(num) || num > max || num < min) {
+    if (Number.isNaN(num) || num > max || num < min) {
       return false;
     }
     return true;
@@ -54,13 +65,6 @@ export default function useProductForm(id) {
       setHasProductName(false);
     } else {
       setHasProductName(true);
-    }
-
-    if (!deliveryLocation || !deliveryLocation.trim()) {
-      hasError = true;
-      setHasDeliveryLocation(false);
-    } else {
-      setHasDeliveryLocation(true);
     }
 
     if (!productCategory) {
@@ -77,7 +81,14 @@ export default function useProductForm(id) {
       setHasProductInfo(true);
     }
 
-    if (!checkValidNumber(productPrice, 50000, 0)) {
+    // if (!deliveryLocation || !deliveryLocation.trim()) {
+    //   hasError = true;
+    //   setHasDeliveryLocation(false);
+    // } else {
+    //   setHasDeliveryLocation(true);
+    // }
+
+    if (!checkValidNumber(productPrice, 50000000, 0)) {
       hasError = true;
       setHasProductPrice(false);
     } else {
@@ -98,19 +109,6 @@ export default function useProductForm(id) {
       setHasDelivery(true);
     }
 
-    if (!checkValidNumber(deliveryTime, 30, 0)) {
-      hasError = true;
-      setHasDeliveryTime(false);
-    } else {
-      setHasDeliveryTime(true);
-    }
-
-    if (!checkValidNumber(paymentMethod, 2, 0)) {
-      hasError = true;
-      setHasPaymentMethod(false);
-    } else {
-      setHasPaymentMethod(true);
-    }
   };
 
   const changeProductValue = (product) => {
@@ -121,8 +119,8 @@ export default function useProductForm(id) {
       setProductPictureUrl(product.picture_url);
       setProductPrice(product.price);
       setProductQuantity(product.quantity);
-      setDeliveryTime(product.delivery_time);
-      setDeliveryLocation(product.delivery_location);
+      setProductRoyalty(product.royalty);
+      setProductToken(product.token);
       setDelivery(product.delivery);
       setPaymentMethod(product.payment_method);
       setRemark(product.remark);
@@ -140,6 +138,9 @@ export default function useProductForm(id) {
     delivery_location: deliveryLocation, // 出貨地點的欄位
     delivery_time: deliveryTime, // 備貨時間的欄位
     payment_method: paymentMethod, // 付款方式 0:貨到付款
+    royalty: productRoyalty,
+    extoken: productToken,
+    mediaType:productMediaType,
     remark,
   };
 
@@ -153,13 +154,41 @@ export default function useProductForm(id) {
 
   const handleSubmitAddForm = (e) => {
     e.preventDefault();
-    checkDataValidity();
+    // checkDataValidity();
     setIsSubmitClicked(true);
-    if (!hasError) {
-      postProduct(formData)(dispatch);
-      alert(t('Apply success, please wait for audit'));
-      navigate('/nft/users/backstage');
-    }
+    // if (!hasError) {
+    //   postProduct(formData)(dispatch);
+    // }
+  };
+
+  const checkInputError = () => {
+    checkDataValidity();
+    return hasError;
+  };
+
+  const handleSubmitProduct = (mintInfo,tokenId) => {
+    // checkDataValidity();
+    // if (!hasError) {
+      let mintData = {
+        ProductCategoryId: mintInfo.ProductCategoryId,
+        name: mintInfo.productName,
+        picture_url: mintInfo.productPictureUrl,
+        info: mintInfo.productInfo,
+        price: mintInfo.productPrice,
+        quantity: 1,
+        delivery: mintInfo.delivery, // 出貨方式  0:面交、1:郵寄
+        delivery_location: mintInfo.delivertyLocation, // 出貨地點的欄位
+        delivery_time: undefined, // 備貨時間的欄位
+        payment_method: undefined, // 付款方式 0:貨到付款
+        royalty: mintInfo.productRoyalty,
+        extoken: mintInfo.productToken,
+        mediaType:mintInfo.productMediaType,
+        remark: mintInfo.remark,
+        tokenid:tokenId
+      };
+      postProduct(mintData)(dispatch);
+    // }
+    navigate('/nft/users/backstage')
   };
 
   const handleSubmitEditForm = (e) => {
@@ -184,11 +213,14 @@ export default function useProductForm(id) {
     productInfo,
     productPrice,
     productQuantity,
+    productRoyalty,
+    productToken,
     delivery,
     deliveryTime,
     deliveryLocation,
     paymentMethod,
     productPictureUrl,
+    productMediaType,
     remark,
 
     hasProductName,
@@ -200,6 +232,9 @@ export default function useProductForm(id) {
     hasDelivery,
     hasPaymentMethod,
     hasProductQuantity,
+    hasProductToken,
+    hasProductMediaType,
+    hasProductRoyalty,
 
     setProductName,
     setProductInfo,
@@ -210,13 +245,21 @@ export default function useProductForm(id) {
     setDeliveryLocation,
     setDelivery,
     setPaymentMethod,
+    setProductToken,
     setRemark,
     setProductQuantity,
-
+    setProductRoyalty,
+    setHasProductToken,
+    setHasProductMediaType,
+    setHasProductRoyalty,
+    setProductMediaType,
+    
     changeProductValue,
     handleChange,
     handleSubmitAddForm,
     handleSubmitEditForm,
     handleChangePicture,
+    handleSubmitProduct,
+    checkInputError
   };
 }

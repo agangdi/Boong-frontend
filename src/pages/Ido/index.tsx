@@ -235,10 +235,7 @@ const Index = ()=>{
 
   return (
     <PageWrapper>
-      <img style={{marginBottom: "20px"}} onClick={() => {
-        window.open("https://docs.google.com/forms/d/e/1FAIpQLSfA-dOW15tyN6dfyZScvcEmT3lC13K9ThFBTruiFD0wOVsoUQ/viewform")
-      }} width="100%" src={process.env.PUBLIC_URL + '/incubator_banner.png'} alt="" />
-      <ConTitle con="CaoJun NFT Collectibles" />
+      <ConTitle con=" NFT Collectibles" />
       {idoInfo && (
 
           <BuyingModal
@@ -266,16 +263,16 @@ const Index = ()=>{
       <AuthorInfo>
         <Author>
           <img src={process.env.PUBLIC_URL + '/cjainft.png'} width="150" style={{marginBottom: '0px'}}/>
-          <ConSubTitle con="CaoJun Limited Edition of NFT Collectibles" />
+          <ConSubTitle con="  Limited Edition of NFT Collectibles" />
           <div style={{lineHeight: '30px', fontSize: '15px'}}>Key terms for CJAI NFT Collectibles & Initial Art Offering ("IRO"): </div>
           <ol style={{fontSize: '15px', textAlign: 'left', lineHeight: "28px"}}>
-            <li>​Total Edition of CaoJunNFT Collectibles released: 600</li>
+            <li>​Total Edition of  NFT Collectibles released: 600</li>
             <li>Total BC released for CJAI IRO: 15,000,000</li>
             <li>List BC Token on boong, BakerySwap and SwapAll for trading and liquidity farming;</li>
             <li>Able to stake BC to earn CJAI and iCASH, Deposit BC-BNB BLP to earn BC, Deposit BC-BUSD to earn BC, and Deposit BC-USDT BLP to earn BC.</li>
-            <li>100,000 $BC can be exchanged with 1 CaoJun NFT, and 1 CaoJun NFT can be converted into one exclusive physical CaoJun Limited Edition of NFT Collectible ("CaoJun NFT Collectible"). The NFT and $BC will be burned afterward.</li>
-            <li>The CaoJun NFT will be available at the CaoJun NFT Collectibles (under NFT Broadway tab), and can only be purchased with $BC</li>
-            <li>No minimum: Users can buy fractions of $BC Offering for CaoJun NFT Collectibles</li>
+            <li>100,000 $BC can be exchanged with 1   NFT, and 1   NFT can be converted into one exclusive physical   Limited Edition of NFT Collectible ("  NFT Collectible"). The NFT and $BC will be burned afterward.</li>
+            <li>The   NFT will be available at the   NFT Collectibles (under NFT Broadway tab), and can only be purchased with $BC</li>
+            <li>No minimum: Users can buy fractions of $BC Offering for   NFT Collectibles</li>
           </ol>
           <div style={{lineHeight: '30px', fontSize: '15px'}}>  Details : 
             <ExternalLink href="https://www.caojunnft.com">
@@ -475,15 +472,6 @@ const Index = ()=>{
       </AuthorInfo>
 
       <IframeComponent iframe={iframe} />
-      <div style={{
-        color: "#474747",
-        marginTop: '50px'
-      }}>
-      ** Converting into one exclusive CaoJun NFT limited edition of digital collectible  or original collectibles ? 
-        <ExternalLink href={"https://docs.google.com/forms/d/e/1FAIpQLSfKQ5ESZ_843cjHGBwKuObT79bfjUPQ3XHOJpy9vw2VFbAZVA/viewform"}>
-          Submit Now .
-        </ExternalLink>
-      </div>
       
     </PageWrapper>
   )

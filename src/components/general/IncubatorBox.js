@@ -35,11 +35,6 @@ const IncubatorBox = () => {
         }
       }}
     >
-      {/* <ExternalLink href="https://docs.google.com/forms/d/e/1FAIpQLSfA-dOW15tyN6dfyZScvcEmT3lC13K9ThFBTruiFD0wOVsoUQ/viewform"> */}
-      <img onClick={() => {
-        window.open("https://docs.google.com/forms/d/e/1FAIpQLSfA-dOW15tyN6dfyZScvcEmT3lC13K9ThFBTruiFD0wOVsoUQ/viewform")
-      }} width="100%" src={process.env.PUBLIC_URL + '/incubator_banner.png'} alt="" />
-      {/* </ExternalLink> */}
     </Carousel>
   );
 };

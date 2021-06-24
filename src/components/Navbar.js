@@ -123,24 +123,6 @@ const Navbar = () => {
         <LeftSide>
           <Logo />
           <SearchBar />
-          <span 
-            style={{
-              marginLeft: '5rem'
-            }}
-            onClick={() => {
-              window.open("https://docs.google.com/forms/d/e/1FAIpQLSeGoEA3tuWG-S1NwUyCylmvCwTjALEbh-eVOqoQXHDp3pEmTA/viewform")
-            }} className="gradient-radius-btn">
-            My Artworks
-          </span>
-          <span 
-            style={{
-              marginLeft: '2rem'
-            }}
-            onClick={() => {
-              window.open("https://docs.google.com/forms/d/e/1FAIpQLSeGoEA3tuWG-S1NwUyCylmvCwTjALEbh-eVOqoQXHDp3pEmTA/viewform")
-            }} className="blank-radius-btn">
-            Mint Artworks
-          </span>
         </LeftSide>
 
         <RightSide>

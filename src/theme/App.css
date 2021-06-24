@@ -114,3 +114,137 @@ html, body{
   letter-spacing: 0.33px;
   border: none;
 }
+
+.center-mask{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.success-message{
+  width: 100%;
+  max-width: 313px;
+  height: 200px;
+  margin: 0 auto;
+  text-align: center;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.success-message > p {
+  color: #474747;
+  font-size: 16px;
+  margin: 20px;
+}
+.page-banner{
+  margin-top: 20px !important;
+}
+.padding-column {
+  padding: 1rem;
+}
+.declare-checkbox{
+  color: #474747;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 30px;
+  width: 90%;
+  font-size: 14px;
+}
+.declare-checkbox > input{
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+.a-link{
+  color: #474747;
+  text-decoration: none;
+  cursor: pointer;
+}
+.iro-title{
+  color: #474747;
+  margin-bottom: 10px;
+  line-height: 30px;
+  font-size: 18px;
+}
+.iro-title1{
+  line-height: 30px;
+  font-size: 15px;
+}
+.auto-list-div{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.user-icons{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-start;
+}
+.margin10{
+  margin: 10px;
+}
+.user-left{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.user-avatar-div{
+  width: 150px; 
+  height: 150px;
+  border-radius: 150px;
+  border: 1px solid #ccc;
+}
+.user-avatar{
+  width: 50%; 
+  height: 50%;
+}
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.edit-desc-btn{
+  width: 42px;
+  height: 42px; 
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+}
+.page-tabs{
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding:0 20px;
+}
+.page-tab{
+  margin-right: 30px;
+  color: #7f7f7f;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+.page-tab:hover {
+  color: #474747;
+  background: #ccc;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+}
+.btn-sm-100{
+  width: 160px;
+  font-size: 13px;
+}

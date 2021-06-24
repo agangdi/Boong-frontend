@@ -35,9 +35,6 @@ const List = ()=>{
       </Title>
       
       <ConSubTitle con="Featured Artist Application" />
-        {/* <StyledLink href="https://docs.google.com/forms/d/e/1FAIpQLSeDP0KdH1VC9v9G-D97SUX1ykcOOkMR_ff9OX5je-g1Qw8ePw/viewform"> */}
-         
-        {/* </StyledLink> */}
     </PageWrapper>
   )
 };

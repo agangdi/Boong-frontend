@@ -1,19 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLOR, FONT } from '../../constants/style';
+import { COLOR, FONT, MEDIA_QUERY } from '../../constants/style';
 import { InputComponent, TextAreaComponent } from '../../components/Input';
 import { RadioBox } from './RadioBox';
 import { SelectBox } from './SelectBox';
 import { PictureBox } from './PictureBox';
 
 const QuestionBox = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 600px;
+  ${MEDIA_QUERY.sm} {
+    width: 90%;
+  }
 `;
 
 const QuestionTitle = styled.div`
   margin-bottom: 10px;
-  color: ${COLOR.text_2};
-  font-size: ${FONT.md};
+  color: #474747;
+  font-size: 14px;
 `;
 
 const ErrorMessage = styled.div`
@@ -24,7 +29,8 @@ const ErrorMessage = styled.div`
 
 export const InputItem = ({
   title,
-  type,
+  type=null,
+  label,
   isNumber,
   errorMessage,
   hasValue,
@@ -36,7 +42,7 @@ export const InputItem = ({
 }) => {
   return (
     <QuestionBox>
-      <QuestionTitle>{title}</QuestionTitle>
+      <QuestionTitle>{label ? label : title}</QuestionTitle>
 
       {type === 'input' && (
         <InputComponent
@@ -65,6 +71,7 @@ export const InputItem = ({
 
       {type === 'radio' && (
         <RadioBox
+          label={label}
           title={title}
           options={options}
           handleChange={handleChange}

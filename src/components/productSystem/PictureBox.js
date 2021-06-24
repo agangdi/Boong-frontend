@@ -1,45 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
-import { COLOR, FONT, DISTANCE, EFFECT } from '../../constants/style';
+import { COLOR, FONT, DISTANCE, EFFECT, MEDIA_QUERY } from '../../constants/style';
+import { useTranslation } from 'react-i18next'
 
 const SetPictureContainer = styled.div`
-  display: flex;
+  // display: flex;
   align-items: center;
 `;
 
-const PreviewPicture = styled.img`
+const PreviewPicture = styled.div`
   box-shadow: ${EFFECT.shadowInput};
-  height: 250px;
-  width: 250px;
-  min-width: 250px;
+  width: 432px;
+  height: 576px;
   border-radius: 0px;
   object-fit: cover;
+  padding: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  ${MEDIA_QUERY.sm} {
+    width: 80%;
+    padding: 0;
+    height: 100vw;
+  }
 `;
 
 const RightSide = styled.div`
-  padding: ${DISTANCE.md};
   min-width: max-content;
 `;
 
 const Description = styled.p`
-  color: ${COLOR.text_2};
-  font-size: ${FONT.xs};
-  margin-bottom: ${DISTANCE.md};
+  width: 60%;
+  color: #474747;
+  font-size: 14px;
+  margin: 0;
+  margin-top: 1rem;
 `;
 
 const Label = styled.label`
-  border: solid 1px transparent;
-  border-radius: 0px;
-  padding: ${(props) => (props.$size === 'lg' ? '10px 90px' : '10px 20px')};
-  background-color: ${COLOR.btn_primary};
-  color: ${COLOR.white};
-  margin: ${DISTANCE.md} 0;
-  min-width: max-content;
-  width: 200px;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.05);
-  }
+  display: none;
+  // background-color: #ffffff;
+  // color:  #7f7f7f;
+  // min-width: max-content;
+  // cursor: pointer;
+  // &:hover {
+  //   border: none;
+  //   color: #ffffff;
+  //   background-color: #7f7f7f;
+  //   transform: scale(1.05);
+  // }
+  // // visibility: hidden;
+  // height: 0px;
 `;
 
 const InputFile = styled.input`
@@ -47,18 +59,23 @@ const InputFile = styled.input`
 `;
 
 export function PictureBox({ pictureUrl, handleChange }) {
+  const {t} = useTranslation()
   return (
     <SetPictureContainer>
-      <PreviewPicture src={pictureUrl} alt='圖片載入失敗' />
+      <PreviewPicture onClick={() => document.getElementById('upload-file').click()}>
+         <img width="100%" src={pictureUrl} alt='' />
+      </PreviewPicture>
       <RightSide>
         <Description>
-          從電腦中選取圖檔
-          <br></br>
-          最佳大小為 600px x 600px
+          {"Support： PNG, JPG , GIF, Video and Audio;"}
+          <br />
+          {"Suggested ratio 3:4; Size <10MB"}
+          <br />
+          {"Mint an NFT charges 0.01BNB"}
         </Description>
         <Label>
-          <InputFile type='file' onChange={handleChange} />
-          選擇圖片
+          <InputFile id="upload-file" type='file' onChange={handleChange} />
+          {/* {t("Choose File")} */}
         </Label>
       </RightSide>
     </SetPictureContainer>

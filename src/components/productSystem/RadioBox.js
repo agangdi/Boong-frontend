@@ -6,6 +6,7 @@ const RadioContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  font-size: 14px;
 `;
 
 export const RadioBox = ({ title, options, handleChange, oldValue}) => {
@@ -15,7 +16,7 @@ export const RadioBox = ({ title, options, handleChange, oldValue}) => {
         <Radio
           key={option.id}
           name={title}
-          value={option.id}
+          value={option.value?option.value:option.id}
           children={option.name}
           handleChange={handleChange}
           currentOption={oldValue}

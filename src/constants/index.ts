@@ -58,7 +58,7 @@ export const UNI: { [chainId in ChainId]: Token } = {
     '0x5f99acf13caff815dd9cb4a415c0fb34e9f4545b',
     18,
     'BC',
-    'boong.ART'
+    'TEAsWap.ART'
   ),
   [ChainId.BSC_TESTNET]: new Token(
     ChainId.BSC_TESTNET,
@@ -72,8 +72,20 @@ export const UNI: { [chainId in ChainId]: Token } = {
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: '0x090D4613473dEE047c3f2706764f49E0821D256e',
-  [ChainId.BSC_MAINNET]:'0x4261c6440CCC38768fd255D0a8036AE0d40bfdae'
+  [ChainId.BSC_MAINNET]:'0x1a5e8936C82a2Ac28738ba0Fe4E21A0eA00664a8'
 }
+
+export const NFTFACTORY: { [chainId in ChainId]?: string } = {
+  [ChainId.BSC_MAINNET]:'0x7c06212329E0922Dc85D28F2D2DD60d5d29b3B0b'
+}
+
+export const NFTEXCHANGE: { [chainId in ChainId]?: string } = {
+  [ChainId.BSC_MAINNET]:'0xFEf9247041A508cfaFa07ac895BCB285DF47A79A'
+}
+
+//0xb0AEB3b4C1CDf40Bc05Dc232073634d08de72060   0.01BNB
+//0x4ebf158511bb844d3c827d71d519637479942ac4   0BNB
+//0x236b4961D3fE0D16aa021CaA394d5F32273e3521 new
 
 export const USDT_BC_LP = new Token(
   ChainId.BSC_MAINNET,
@@ -81,6 +93,30 @@ export const USDT_BC_LP = new Token(
   18,
   'U_T_BLP',
   'USDT_BC_LP'
+)
+
+export const BNB_BUSD_LP = new Token(
+    ChainId.BSC_MAINNET,
+    '0x559e3d9611e9cb8a77c11335bdac49621382188b',
+    18,
+    'BNB-BUSD BLP',
+    'BNB_BUSD_BakeryLP'
+)
+
+export const BNB_ETH_LP = new Token(
+    ChainId.BSC_MAINNET,
+    '0xa50b9c5DB61C855D5939aa1a66B26Df77745809b',
+    18,
+    'BNB-ETH BLP',
+    'BNB_ETH_BakeryLP'
+)
+
+export const BNB_WBTC_LP = new Token(
+    ChainId.BSC_MAINNET,
+    '0x58521373474810915b02FE968D1BCBe35Fc61E09',
+    18,
+    'BNB-BTCB BLP',
+    'BNB_BTCB_BakeryLP'
 )
 
 export const ETH_BC_LP = new Token(
@@ -107,12 +143,28 @@ export const BNB_SHIH_LP = new Token(
     'BNB_SHIH_BakeryLP'
 )
 
+export const BNB_BC_LP = new Token(
+    ChainId.BSC_MAINNET,
+    '0xab8f32d5e14d84b21befe0cc57b63e086af558e1',
+    18,
+    'BNB-BC BLP',
+    'BNB_BC_BakeryLP'
+)
+
 export const BUSD_SHIH_LP = new Token(
     ChainId.BSC_MAINNET,
     '0x1692b78116352fc8f11838a61a115b0ba0e6a88d',
     18,
     'BUSD-SHIH BLP',
     'BUSD_SHIH_BakeryLP'
+)
+
+export const USDT_SHIH_LP = new Token(
+    ChainId.BSC_MAINNET,
+    '0x25b0d63f06ae5103a4710b009c7e26c8ca149e16',
+    18,
+    'USDT_SHIH BLP',
+    'USDT_SHIH_BakeryLP'
 )
 
 export const B_DAI = new Token(
@@ -165,7 +217,7 @@ export const DOGGY = new Token(
 export const SAFEMOON = new Token(
     ChainId.BSC_MAINNET,
     '0x8076c74c5e3f5852037f31ff0093eeb8c8add8d3',
-    18,
+    9,
     'SAFEMOON',
     'SafeMoon'
 )
@@ -199,7 +251,7 @@ export const CJAI = new Token(
     '0x26c1a317c4cdea9408bf9a82b4c7645bffdfea21',
     18,
     'CJAI',
-    'CaoJunNFT'
+    ' NFT'
 )
 
 
