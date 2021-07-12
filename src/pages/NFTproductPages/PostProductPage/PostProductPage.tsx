@@ -23,7 +23,7 @@ import { ActionButton } from '../../../components/NFTButton'
 
 const Wrapper = styled.div`
   width: 86%;
-  max-width: 620px
+  max-width: 820px
   margin: 0 auto;
   padding: 40px;
   display: flex;
@@ -292,7 +292,6 @@ const PostProductPage = () => {
   //Royalties: 1%, 5% , 10%, 20% 30%
   const royaltyOptions = [
     { id: '0', name: '0%',value:0 },
-    { id: '1', name: '1%',value:100 },
     { id: '5', name: '5%' ,value:500},
     { id: '10', name: '10%',value:1000 },
     { id: '20', name: '20%',value:2000},
