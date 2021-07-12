@@ -117,7 +117,7 @@ const ApplyForVendorPage = () => {
               width: '100%'
             }}>
               <CheckImage>
-                <Title2>{t('Create collections and sell NFTs to your fans ,start now !')}</Title2>
+                <Title2>{t('Create collections and sell NFTs to your fans, start now !')}</Title2>
                 <TwoButton>
                   <ButtonPrimary onClick={handleCheck}>
                     {t('OK')}
@@ -138,13 +138,6 @@ const ApplyForVendorPage = () => {
         {/* <PageBottom>
           <Nav path='/nft' children={t('Back to NFTHome')} />
         </PageBottom> */}
-        {successMode && (
-          <WrapperMask onClick={() => setSuccessMode(false)} className="center-mask">
-            <SuccessMessage className="success-message">
-              {t('Update Success')}
-            </SuccessMessage>
-          </WrapperMask>
-        )}
       </Wrapper>
     </ThickNavPage>
   );

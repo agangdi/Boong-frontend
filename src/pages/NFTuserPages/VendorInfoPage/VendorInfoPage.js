@@ -4,7 +4,7 @@ import useUser from '../../../hooks/userHooks/useUser';
 import { Nav } from '../../../components/NFTButton';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { WrapperMask } from '../../../components/userSystem/';
-import { COLOR, FONT, EFFECT, DISTANCE } from '../../../constants/style';
+import { COLOR, FONT, EFFECT, DISTANCE, MEDIA_QUERY } from '../../../constants/style';
 import { ActionButton } from '../../../components/NFTButton';
 import {
   Announcement,
@@ -21,6 +21,12 @@ const Wrapper = styled.div`
   width: 50vw;
   margin: 0 auto;
   padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  ${MEDIA_QUERY.sm} {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h1`
@@ -31,7 +37,7 @@ const Title = styled.h1`
 const Text = styled.p`
   color: ${COLOR.black};
   font-size: ${FONT.md};
-  margin: ${DISTANCE.lg} 0 ${DISTANCE.sm} 0;
+  margin: ${DISTANCE.sm} 0 ${DISTANCE.sm} 0;
 `;
 
 const ErrorText = styled.p`
@@ -98,31 +104,23 @@ const VendorInfoPage = () => {
   return (
     <ThickNavPage>
       <Wrapper>
-        <Title>{t('General Information')}</Title>
+        <Title>{t('Featured Artists Information')}</Title>
         {/*<Announcement />*/}
         {isAdminStatus && <SetPermission setSuccessMode={setSuccessMode} />}
         <VendorInfoForm
           setSuccessMode={setSuccessMode}
+          successMode={successMode}
           isAdminStatus={isAdminStatus}
         />
         {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
-        <Text>{t('Upload Avatar')}</Text>
+        {/* <Text>{t('Upload Avatar')}</Text>
         <SetAvatar setSuccessMode={setSuccessMode} />
         <Text>{t('Upload Banner')}</Text>
-        <SetBanner setSuccessMode={setSuccessMode} />
+        <SetBanner setSuccessMode={setSuccessMode} /> */}
         <PageBottom>
-          <Nav path='/nft' children={t('Back to NFTHome')} />
+          <Nav path='/nft/users/backstage' children={t('Back to Account')} />
         </PageBottom>
-        {successMode && (
-          <WrapperMask>
-            <SuccessMessage>
-              <p>{t('Success')}</p>
-              <ActionButton onClick={() => setSuccessMode(false)}>
-                {t('Confirm')}
-              </ActionButton>
-            </SuccessMessage>
-          </WrapperMask>
-        )}
+        
       </Wrapper>
     </ThickNavPage>
   );

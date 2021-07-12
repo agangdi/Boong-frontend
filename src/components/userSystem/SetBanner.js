@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import useUser from '../../hooks/userHooks/useUser';
 import useSet from '../../hooks/userHooks/useSet';
 import { WrapperMask } from '../userSystem';
-import { COLOR, FONT, DISTANCE, EFFECT } from '../../constants/style';
+import { COLOR, FONT, DISTANCE, EFFECT, MEDIA_QUERY } from '../../constants/style';
 import { ActionButton } from '../NFTButton'
+import { useTranslation } from 'react-i18next'
 
 const SetBannerContainer = styled.div`
   display: flex;
@@ -15,32 +16,39 @@ const SetBannerContainer = styled.div`
 const PreviewBanner = styled.img`
   box-shadow: ${EFFECT.shadowInput};
   height: 200px;
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 0px;
   object-fit: cover;
 `;
 
 const RightSide = styled.div`
   min-width: max-content;
-  margin-top: ${DISTANCE.md};
 `;
 
 const Description = styled.p`
-  color: ${COLOR.text_2};
-  font-size: ${FONT.xs};
+  color: #474747;
+  font-size: 14px;
   margin-bottom: ${DISTANCE.md};
+  ${MEDIA_QUERY.sm} {
+    width: 80%;
+  }
+
 `;
 
 const Label = styled.label`
-  border: solid 1px transparent;
-  border-radius: 0px;
+  background-color: #ffffff;
+  color:  #7f7f7f;
+  border: 1px solid #7f7f7f;
   padding: ${(props) => (props.$size === 'lg' ? '10px 90px' : '10px 20px')};
-  background-color: ${COLOR.btn_primary};
-  color: ${COLOR.white};
   margin: ${DISTANCE.md} 0;
   min-width: max-content;
-  width: 200px;
+  width: 286px;
+  cursor: pointer;
   &:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #7f7f7f;
     transform: scale(1.05);
   }
 `;
@@ -106,6 +114,7 @@ const LoadingMask = styled.div`
 
 export default function SetBanner({ setSuccessMode }) {
   const { user } = useUser();
+  const {t} = useTranslation()
   const {
     isCheckImage,
     uploadError,
@@ -125,34 +134,34 @@ export default function SetBanner({ setSuccessMode }) {
 
   return (
     <SetBannerContainer>
-      <PreviewBanner src={bannerUrl} alt='圖片載入失敗' />
+      <PreviewBanner src={bannerUrl} alt='' />
       <RightSide>
         <Description>
-          從電腦中選取圖檔<br></br>最佳大小為 250 x 1140px
+        {t("Pick from computer")}，{t("The best size")} 250 x 1140px
         </Description>
         <Label>
           <InputFile type='file' onChange={handleChangeBannerFile} />
-          選擇圖片
+          {t("Choose File")}
         </Label>
         {isCheckImage && (
           <WrapperMask>
             <CheckImage>
-              <Title>是否上傳這張照片？</Title>
-              <CheckBanner src={bannerUrl} alt='圖片載入失敗' />
+              <Title>{t("Upload or not")}</Title>
+              <CheckBanner src={bannerUrl} alt='' />
               {uploadError && <ErrorMessage>{uploadError}</ErrorMessage>}
               <TwoButton>
                 <ActionButton
                   $margin={0}
                   onClick={() => handleSubmitSetBanner(setSuccessMode)}
                 >
-                  確定
+                  {t("Submit")}
                 </ActionButton>
                 <ActionButton
                   $bg={'red'}
                   $margin={0}
                   onClick={() => handleCancelSetBanner(setSuccessMode)}
                 >
-                  取消
+                  {t("Cancel")}
                 </ActionButton>
               </TwoButton>
             </CheckImage>

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { COLOR, FONT, DISTANCE } from '../../../constants/style';
+import { COLOR, FONT, DISTANCE, MEDIA_QUERY } from '../../../constants/style';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { StandardNavPage } from '../../../components/Page';
 import useUser from '../../../hooks/userHooks/useUser';
 import useProduct from '../../../hooks/productHooks/useProduct';
+import { NavLink } from 'react-router-dom';
 import { NormalButton, Nav } from '../../../components/NFTButton';
+import Pagination from '../../../components/Pagination/Index';
+
 import {
   SellerInfo,
   SetAnnouncement,
@@ -24,20 +27,22 @@ const SellerProductTitle = styled.div`
   padding-bottom: ${DISTANCE.sm};
   font-size: ${FONT.lg};
   color: ${COLOR.text_2};
-  border-bottom: 1px solid ${COLOR.cccccc};
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  ${MEDIA_QUERY.sm} {
+    width: 90%;
+    padding: 0px 5%;
+  }
 `;
 
 const ButtonContainer = styled.div`
   width: 100%;
-  text-align: right;
-  & > button {
-    position: absolute;
-    transform: translate(-150%, 50px);
-    &:hover {
-      transform: translate(-150%, 50px);
-    }
+  display: flex;
+  justify-content: flex-end;
+  ${MEDIA_QUERY.sm} {
+    justify-content: center;
   }
 `;
 
@@ -54,22 +59,36 @@ const VendorBackstagePage = () => {
     vendorInfo,
     products,
     productErrorMessage,
+    page,
+    productCount,
     handleVendorProductMoreButton,
     handleGetProductsFromVendor,
     handleGetUserById,
   } = useProduct();
 
+  console.log('useProduct', products)
+
   const handleSetAnnouncement = () => {
     setIsSettingAnnouncement(true);
   };
 
+  const { handleApplyForVendor } = useUser();
+
   useEffect(() => {
     window.scroll(0, 0);
     handleGetMe().then((result) => {
-      if (!result.data.is_vendor) navigate('/');
-      setId(result.data.userId);
-      handleGetUserById(result.data.userId);
-      handleGetProductsFromVendor(result.data.userId, 1);
+      // todo 自动
+      if (!result.data.is_vendor) {
+        handleApplyForVendor()
+        // navigate('/');
+        setTimeout(() => {
+          window.location.href = window.location.href
+        }, 500)
+      }else{
+        setId(result.data.userId);
+        handleGetUserById(result.data.userId);
+        handleGetProductsFromVendor(result.data.userId, 1, productCat);
+      }
     });
     return () => {
       dispatch(setProducts([]));
@@ -77,34 +96,52 @@ const VendorBackstagePage = () => {
     };
   }, []);
 
-  return (
-    <StandardNavPage>
-      <Banner banner={vendorInfo.banner_url} loaded={loaded} onLoad={onLoad} />
-      <SellerInfo
-        vendorInfo={vendorInfo}
-        products={products}
-        loaded={loaded}
-        onLoad={onLoad}
-      />
-      <ButtonContainer>
-        <NormalButton onClick={handleSetAnnouncement}>{t('Edit Description')}</NormalButton>
-      </ButtonContainer>
-      {isSettingAnnouncement && (
-        <SetAnnouncement setIsSettingAnnouncement={setIsSettingAnnouncement} />
-      )}
-      <Announcement announcement={user?user.announcement:''} />
+  const [productCat, setProductCat] = useState('all');
 
-      <SellerProductTitle>
-        <p>{t('Posted NFTs')} </p>
-        <Nav children={t('Add NFT')} path={'/nft/products/post'} />
-      </SellerProductTitle>
-      <Products
-        products={products}
-        id={id}
-        handler={handleVendorProductMoreButton}
-        productErrorMessage={productErrorMessage}
-      />
-    </StandardNavPage>
+  const changeCat = function(t) {
+    setProductCat(t)
+    handleGetProductsFromVendor(id, page, t);
+  }
+
+  console.log('product cat', productCat)
+
+  return (
+    <>
+      <Banner banner={vendorInfo.banner_url} loaded={loaded} onLoad={onLoad} />
+      <StandardNavPage>
+        <SellerInfo
+          vendorInfo={vendorInfo}
+          products={products}
+          loaded={loaded}
+          onLoad={onLoad}
+        />
+        
+        {isSettingAnnouncement && (
+          <SetAnnouncement setIsSettingAnnouncement={setIsSettingAnnouncement} />
+        )}
+        <Announcement handleSetAnnouncement={handleSetAnnouncement} announcement={user?user.description:''} />
+
+        <SellerProductTitle className="SellerProductTitle">
+          <div>
+            <NavLink style={{ minWidth: 'fit-content' }} to={'/nft'}>
+              <NormalButton className="btn-sm-100" >{t('Buy NFT')}</NormalButton>
+            </NavLink>
+            <NavLink style={{ minWidth: 'fit-content' }} to={'/nft/products/post'}>
+              <NormalButton className="btn-sm-100" >{t('Add NFT')}</NormalButton>
+            </NavLink>
+          </div>
+        </SellerProductTitle>
+        <Products
+          products={products}
+          id={id}
+          handler={handleVendorProductMoreButton}
+          productErrorMessage={productErrorMessage}
+        />
+        <Pagination count={productCount} page={page} handleChange={(_page) => {
+          handleGetProductsFromVendor(id, _page, productCat)
+        }} />
+      </StandardNavPage>
+    </>
   );
 };
 

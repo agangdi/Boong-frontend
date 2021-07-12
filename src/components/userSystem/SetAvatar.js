@@ -3,44 +3,54 @@ import styled from 'styled-components';
 import useUser from '../../hooks/userHooks/useUser';
 import useSet from '../../hooks/userHooks/useSet';
 import { WrapperMask } from '../userSystem';
-import { COLOR, FONT, DISTANCE, EFFECT } from '../../constants/style';
+import { COLOR, FONT, DISTANCE, EFFECT, MEDIA_QUERY } from '../../constants/style';
 import { ActionButton } from '../NFTButton'
+import { useTranslation } from 'react-i18next'
 
 const SetAvatarContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const PreviewAvatar = styled.img`
-  box-shadow: ${EFFECT.shadowInput};
-  height: 250px;
-  width: 250px;
-  min-width: 250px;
+  // box-shadow: ${EFFECT.shadowInput};
+  height: 102px;
+  width: 102px;
   border-radius: 0px;
   object-fit: cover;
+  cursor: pointer;
 `;
 
 const RightSide = styled.div`
-  padding: ${DISTANCE.md};
   min-width: max-content;
+  font-size: 14px;
+
 `;
 
 const Description = styled.p`
-  color: ${COLOR.text_2};
-  font-size: ${FONT.xs};
-  margin-bottom: ${DISTANCE.md};
+  color: #474747;
+  font-size: 14px;
+  margin-bottom: ${DISTANCE.sm};
+  ${MEDIA_QUERY.sm} {
+    width: 80%;
+  }
 `;
 
 const Label = styled.label`
-  border: solid 1px transparent;
-  border-radius: 0px;
+  background-color: #ffffff;
+  color:  #7f7f7f;
+  border: 1px solid #7f7f7f;
   padding: ${(props) => (props.$size === 'lg' ? '10px 90px' : '10px 20px')};
-  background-color: ${COLOR.btn_primary};
-  color: ${COLOR.white};
   margin: ${DISTANCE.md} 0;
   min-width: max-content;
   width: 200px;
+  display: none;
+  cursor: pointer;
   &:hover {
+    border: none;
+    color: #ffffff;
+    background-color: #7f7f7f;
     transform: scale(1.05);
   }
 `;
@@ -64,9 +74,8 @@ const CheckImage = styled.div`
 `;
 
 const CheckAvatar = styled.img`
-  box-shadow: ${EFFECT.shadowInput};
-  height: 300px;
-  width: 300px;
+  height: 102px;
+  width: 102px;
   border-radius: 0px;
   object-fit: cover;
 `;
@@ -79,7 +88,7 @@ const Title = styled.h1`
 
 const TwoButton = styled.div`
   margin: ${DISTANCE.md} auto;
-  width: 170px;
+  width: 270px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -106,6 +115,7 @@ const LoadingMask = styled.div`
 
 export default function SetAvatar({ setSuccessMode }) {
   const { user } = useUser();
+  const {t} = useTranslation()
   const {
     isCheckImage,
     uploadError,
@@ -125,34 +135,37 @@ export default function SetAvatar({ setSuccessMode }) {
 
   return (
     <SetAvatarContainer>
-      <PreviewAvatar src={avatarUrl} alt='圖片載入失敗' />
+      <PreviewAvatar onClick={() => document.getElementById('uploadAvatar').click()} src={avatarUrl} alt='' />
       <RightSide>
         <Description>
-          從電腦中選取圖檔<br></br>最佳大小為 250 x 250px
+          {"Support： PNG, JPG , GIF, Video and Audio; Suggested 102* 102;"}
         </Description>
         <Label>
-          <InputFile type='file' onChange={handleChangeFile} />
-          選擇圖片
+          <InputFile id="uploadAvatar" type='file' onChange={handleChangeFile} />
+          {t("Choose File")}
         </Label>
         {isCheckImage && (
           <WrapperMask>
             <CheckImage>
-              <Title>是否上傳這張照片？</Title>
-              <CheckAvatar src={avatarUrl} alt='圖片載入失敗' />
+              <Title>{t("Upload or not")}</Title>
+              <CheckAvatar src={avatarUrl} alt='' />
               {uploadError && <ErrorMessage>{uploadError}</ErrorMessage>}
               <TwoButton>
                 <ActionButton
                   $margin={0}
                   onClick={() => handleSubmitSetAvatar(setSuccessMode)}
                 >
-                  確定
+                  {t("Submit")}
                 </ActionButton>
                 <ActionButton
+                  style={{
+                    marginLeft: '10px'
+                  }}
                   $bg={'red'}
                   $margin={0}
                   onClick={() => handleCancelSetAvatar(setSuccessMode)}
                 >
-                  取消
+                  {t("Cancel")}
                 </ActionButton>
               </TwoButton>
             </CheckImage>

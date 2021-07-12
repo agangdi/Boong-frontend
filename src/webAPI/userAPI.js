@@ -10,6 +10,7 @@ const getMeAPI = () => {
 };
 
 const updateUserAPI = (data) => {
+  console.log('v1/users/me', data)
   const token = localStorage.getItem('token');
   return getMeAPI().then((res) => {
     return fetch(`${BASE_URL}/users/me`, {
@@ -20,11 +21,15 @@ const updateUserAPI = (data) => {
       },
       body: JSON.stringify({
         nickname: data.nickname,
-        id_card_no: data.id_card_no,
-        email: data.email,
-        address: data.address,
-        birthday: data.birthday,
-        socialmedia_id: data.socialmedia_id,
+        description: data.description ? data.description : '',
+        portfolio: data.portfolio ? data.portfolio : '',
+        twitter: data.twitter ? data.twitter : '',
+        instagram: data.instagram ? data.instagram : '',
+        profile: data.profile ? data.profile : '',
+        artsNumber: data.artsNumber ? data.artsNumber : '',
+        contact: data.contact ? data.contact : '',
+        other: data.other ? data.other : '',
+        artworksLink: data.artworksLink ? data.artworksLink : '',
       }),
     }).then((res) => res.json());
   });
@@ -54,7 +59,7 @@ const uploadAvatarAPI = (data) => {
   return fetch('https://api.imgur.com/3/image', {
     method: 'POST',
     headers: {
-      Authorization: 'Client-ID 4610c48a0c55b2a',
+      Authorization: 'Client-ID 13c7722407e3240',
     },
     body: formData,
   })
@@ -83,7 +88,7 @@ const uploadBannerAPI = (data) => {
   return fetch('https://api.imgur.com/3/image', {
     method: 'POST',
     headers: {
-      Authorization: 'Client-ID 4610c48a0c55b2a',
+      Authorization: 'Client-ID 13c7722407e3240',
     },
     body: formData,
   })
@@ -112,7 +117,7 @@ const uploadQRCodeAPI = (data) => {
   return fetch('https://api.imgur.com/3/image', {
     method: 'POST',
     headers: {
-      Authorization: 'Client-ID 4610c48a0c55b2a',
+      Authorization: 'Client-ID 13c7722407e3240',
     },
     body: formData,
   })
