@@ -1,6 +1,6 @@
 import { BASE_URL } from '../constants/unit';
 
-const getUnCheckProducBCPI = (page) => {
+const getUnCheckProductsAPI = (page) => {
   const token = localStorage.getItem('token');
   const currentPage = page || 1;
   return fetch(`${BASE_URL}/products?_page=${currentPage}&_status=checking`, {
@@ -54,7 +54,21 @@ const updateProductStatusAPI = (id, status) => {
   }).then((res) => res.json());
 };
 
-const getProducBCPI = (params) => {
+const updateProductsOrderidAPI = (ids, orderids) => {
+  const token = localStorage.getItem('token');
+  return fetch(`${BASE_URL}/manages/update-orderids/${ids}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      orderids,
+    }),
+  }).then((res) => res.json());
+};
+
+const getProductsAPI = (params) => {
   const token = localStorage.getItem('token');
   const queryString = `_offset=${params.offset ? params.offset : 0}&_limit=${
     params.limit ? params.limit : ''
@@ -68,7 +82,7 @@ const getProducBCPI = (params) => {
   }).then((res) => res.json());
 };
 
-const searchProducBCPI = (params) => {
+const searchProductsAPI = (params) => {
   const token = localStorage.getItem('token');
   const queryString = `_keyword=${params.keyword}&_page=${
     params.page ? params.page : 1
@@ -94,11 +108,12 @@ const getMailsAPI = () => {
 };
 
 export {
-  getUnCheckProducBCPI,
+  getUnCheckProductsAPI,
   updateProductStatusAPI,
   getUsersAPI,
   searchUsersAPI,
-  getProducBCPI,
-  searchProducBCPI,
+  getProductsAPI,
+  searchProductsAPI,
   getMailsAPI,
+  updateProductsOrderidAPI
 };

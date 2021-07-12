@@ -25,12 +25,13 @@ const Selector = styled.select`
 
 const OptionComponent = styled.option``;
 
-export default function ExamineSelector({ product }) {
+export default function ExamineSelector(props) {
+  const { product, setPassedProducts } = props
   const {
     value,
     isChecked,
     setValue,
-    handleChangeSelector,
+    handleChangeSelector
   } = useAdmin();
 
   useEffect(() => {
@@ -40,7 +41,11 @@ export default function ExamineSelector({ product }) {
   return (
     <ExamineContainer>
       <Selector
-        onChange={(e) => handleChangeSelector(e, product)}
+        onChange={(e) => {
+          handleChangeSelector(e, product)
+          const status = e.target.value === '通過' ? '1' : '2';
+          setPassedProducts(status, product)
+        }}
         value={value}
         $bg={value}
       >

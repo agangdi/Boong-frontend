@@ -44,11 +44,7 @@ export default function useCart() {
   const { user } = useOrder();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const formatter = new Intl.NumberFormat("zh-TW", {
-    style: "currency",
-    currency: "NTD",
-    minimumFractionDigits: 0,
-  });
+  const formatter = new Intl.NumberFormat();
   const carts = useSelector(selectCarts);
   const errorMessage = useSelector(selectError);
   const isLoading = useSelector(selectLoading);
@@ -65,6 +61,7 @@ export default function useCart() {
   const checked = useSelector(selectChecked);
 
   const handleDeleteProductInCart = (id) => {
+    // todo for simon
     deleteCartItem(id)(dispatch);
   };
   const handleDeleteCart = (id) => {
@@ -173,8 +170,8 @@ export default function useCart() {
   const handleSelectQuantity = (e) => {
     dispatch(setQuantity(e.target.value));
   };
-  const handleAddProduct = (productId, quantity, userId, price) => {
-    (addCartItem(productId, quantity, userId, price)(dispatch)).then((res) => {
+  const handleAddProduct = (productId, quantity, userId, price,orderid) => {
+    (addCartItem(productId, quantity, userId, price,orderid)(dispatch)).then((res) => {
       if (res.ok === 1 || quantity === 1) {
         dispatch(setHasAdd(true));
       }

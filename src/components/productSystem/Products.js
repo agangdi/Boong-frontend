@@ -11,22 +11,46 @@ import {
 } from '../../redux/slices/productSlice/productSlice';
 import { TYPE } from '../../theme';
 
-import TalentDiv from '../../components/Card/Talent'
-
 const ProductsContainer = styled.div`
   padding: 0; 
-  width: 100%;
-  max-width: 997px;
-  margin: 0 auto;
 `;
 
 const ProductsWrap = styled.div`
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  ${MEDIA_QUERY.sm}{
+    justify-content: center;
+  }
 `;
 
 const ProductContainer = styled.div`
-  width: 100%;
-  max-width: 313px;
+  width: 30.333333%;
+  ${MEDIA_QUERY.lg} {
+    width: 45%;
+    margin: 0 2.5%;
+    margin-top: 30px;
+  }
+  ${MEDIA_QUERY.md} {
+    width: 60%;
+    margin: 0 20%;
+    margin-top: 30px;
+  }
+  ${MEDIA_QUERY.sm}{
+    width: 90%;
+    margin: 0;
+    margin-top: 30px;
+  }
+  margin: 0 1.5%;
+  border-width: 0 0 0 0;
+  border-style: solid solid solid solid;
+  border-color: rgba(176, 169, 134, 1) rgba(176, 169, 134, 1) rgba(176, 169, 134, 1) rgba(176, 169, 134, 1);
+  border-radius: 0 0 0 0;
+  box-shadow: 0 4px 10px 0 rgb(0 0 0 / 10%);
+  overflow: hidden;
+  transform: translateZ(0);
+  margin-top: 20px;
   font-size: 15px;
   color: #000000;
   font-weight: bold;
@@ -34,6 +58,7 @@ const ProductContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding-bottom: 20px; 
+  text-align: center;
 `;
 
 const Placeholder = styled.div`
@@ -52,7 +77,7 @@ const ProductPicture = styled.img`
 
 const ProductName = styled.div`
   width: 95%;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   margin-top: 10px;
   cursor: pointer;
@@ -63,7 +88,7 @@ const ProductName = styled.div`
 const VendorName = styled.div`
   margin-top: 10px;
   width: 95%;
-  font-size: 13px;
+  font-size: 12px;
   color: #7f7f7f;
   text-align: left;
   cursor: pointer;
@@ -72,7 +97,7 @@ const VendorName = styled.div`
 
 const ProductPrice = styled.div`
   margin-top: 5px;
-  width: 90%;
+  width: 95%;
   text-align: left;
   margin-bottom: 10px;
 `;
@@ -99,24 +124,34 @@ const StyledLink = styled(NavLink)`
   }
 `
 
-const Product = ({ product, onLoad, loaded, $width, $height, $margin }) => {
-  const formatter = new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-  });
-
+export const Product = ({ product, onLoad, loaded, $width, $height, $margin }) => {
+  const {handleTokenSwitch} = useProduct();
+  const formatter = new Intl.NumberFormat();
   return (
     <ProductContainer $width={$width} $height={$height} $margin={$margin}>
-      {/* <StyledLink to={`/nft/products/${product.id}`}> */}
-        <ProductPicture
-          src={product.picture_url}
-          style={{ opacity: loaded ? 1 : 0 }}
-          onLoad={onLoad}
-          $width={$width}
-          $height={$height}
-        />
-      {/* </StyledLink> */}
+      {product.link && (
+        <NavLink to={product.link}>
+          <ProductPicture
+            src={product.picture_url}
+            style={{ opacity: loaded ? 1 : 0 }}
+            onLoad={onLoad}
+            $width={$width}
+            $height={$height}
+          />
+        </NavLink>
+      )}
+      {!product.link && (
+        <NavLink to={`/nft/products/${product.id}`}>
+          <ProductPicture
+            src={product.picture_url}
+            style={{ opacity: loaded ? 1 : 0 }}
+            onLoad={onLoad}
+            $width={$width}
+            $height={$height}
+          />
+        </NavLink>
+      )}
+
       <ProductName>
         {product.title}
         {(product.number) && (
@@ -124,21 +159,29 @@ const Product = ({ product, onLoad, loaded, $width, $height, $margin }) => {
         )}
       </ProductName>
       <VendorName>
-        {product.info}
+        {product.name}
       </VendorName>
-      <ProductPrice>
-        <TYPE.darkGray fontSize={14}>
-          {product.remark}
+      {(product.desc) &&
+        (
+          <VendorName>
+            {product.desc}
+          </VendorName>
+        )
+      }
+      {product.price && (<ProductPrice>
+        <TYPE.darkGray fontSize={12}>
+        {formatter.format(product.price)} 
+        <span style={{fontSize: '9px'}}>{' ' + handleTokenSwitch(product.extoken)}</span>
         </TYPE.darkGray>
-      </ProductPrice>
+      </ProductPrice>)
+      }
     </ProductContainer>
   );
 };
 
+
 export const Products = ({
   products,
-  id,
-  handler,
   productErrorMessage,
   $width,
   $height,
@@ -147,46 +190,35 @@ export const Products = ({
   $justify,
 }) => {
   const { loaded, onLoad } = useProduct();
-  const producBCrray = useSelector(selectProducts);
+  const productsArray = useSelector(selectProducts);
   const productCount = useSelector(selectProductCount);
   return (
     <>
       <ProductsContainer $padding={$padding}>
-        <ProductsWrap className='grid-container'>
+        <ProductsWrap $justify={$justify}>
           <>
-            {products.map((v, i) => {
+            {products.map((product) => {
               return (
-                <TalentDiv 
-                  key={'gallery' + i} 
-                  title={v.remark}
-                  price={v.price}
-                  author={v.name}
-                  pic={v.picture_url}> 
-                </TalentDiv>
-                // <Product
-                //   key={product.id}
-                //   product={product}
-                //   onLoad={onLoad}
-                //   loaded={loaded}
-                //   $width={$width}
-                //   $height={$height}
-                //   $margin={$margin}
-                // />
+                <Product
+                  key={product.id}
+                  product={product}
+                  onLoad={onLoad}
+                  loaded={loaded}
+                  $width={$width}
+                  $height={$height}
+                  $margin={$margin}
+                />
               );
             })}
           </>
-          <Placeholder $width={$width} $margin={$margin} />
-          <Placeholder $width={$width} $margin={$margin} />
-          <Placeholder $width={$width} $margin={$margin} />
-          <Placeholder $width={$width} $margin={$margin} />
         </ProductsWrap>
       </ProductsContainer>
 
-      {productCount - producBCrray.length <= 0 ? (
+      {/* {productCount - productsArray.length <= 0 ? (
         <></>
       ) : (
         <>{handler && <MoreButton id={id} handler={handler} />}</>
-      )}
+      )} */}
 
       {productErrorMessage && (
         <ErrorMessage productErrorMessage={productErrorMessage} />

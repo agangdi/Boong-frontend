@@ -57,7 +57,7 @@ export const UNI: { [chainId in ChainId]: Token } = {
     ChainId.BSC_MAINNET,
     '0x5f99acf13caff815dd9cb4a415c0fb34e9f4545b',
     18,
-    'BC',
+    'TSA',
     'TEAsWap.ART'
   ),
   [ChainId.BSC_TESTNET]: new Token(
@@ -76,23 +76,26 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
 }
 
 export const NFTFACTORY: { [chainId in ChainId]?: string } = {
-  [ChainId.BSC_MAINNET]:'0x7c06212329E0922Dc85D28F2D2DD60d5d29b3B0b'
+  [ChainId.BSC_MAINNET]:'0x11f611A84e2DAd9445bd2eFfA3680C8A6e5f05b0'
 }
 
 export const NFTEXCHANGE: { [chainId in ChainId]?: string } = {
-  [ChainId.BSC_MAINNET]:'0xFEf9247041A508cfaFa07ac895BCB285DF47A79A'
+  [ChainId.BSC_MAINNET]:'0x50F1DE017f1Dd26d12B93471574F88E82B6007B1'
 }
 
+//0x35026E7EA11824c832D9C73449dd333cBcd1c674
+//0xe38924646842F252c8C76Ebc09208F3c2e478E90
 //0xb0AEB3b4C1CDf40Bc05Dc232073634d08de72060   0.01BNB
 //0x4ebf158511bb844d3c827d71d519637479942ac4   0BNB
 //0x236b4961D3fE0D16aa021CaA394d5F32273e3521 new
+//0xFEf9247041A508cfaFa07ac895BCB285DF47A79A 有钱
 
-export const USDT_BC_LP = new Token(
+export const USDT_TSA_LP = new Token(
   ChainId.BSC_MAINNET,
   '0xcedeebd6127b65bb4b56d86b92eb4dd9bf28988a',
   18,
   'U_T_BLP',
-  'USDT_BC_LP'
+  'USDT_TSA_LP'
 )
 
 export const BNB_BUSD_LP = new Token(
@@ -119,12 +122,12 @@ export const BNB_WBTC_LP = new Token(
     'BNB_BTCB_BakeryLP'
 )
 
-export const ETH_BC_LP = new Token(
+export const ETH_TSA_LP = new Token(
   ChainId.BSC_MAINNET,
   '0xc31173132a36c2453693d9e46d776d4b669b158f',
   18,
   'E_T_BLP',
-  'ETH_BC_LP'
+  'ETH_TSA_LP'
 )
 
 export const BNB_BAKE_LP = new Token(
@@ -143,12 +146,12 @@ export const BNB_SHIH_LP = new Token(
     'BNB_SHIH_BakeryLP'
 )
 
-export const BNB_BC_LP = new Token(
+export const BNB_TSA_LP = new Token(
     ChainId.BSC_MAINNET,
     '0xab8f32d5e14d84b21befe0cc57b63e086af558e1',
     18,
-    'BNB-BC BLP',
-    'BNB_BC_BakeryLP'
+    'BNB-TSA BLP',
+    'BNB_TSA_BakeryLP'
 )
 
 export const BUSD_SHIH_LP = new Token(
@@ -180,6 +183,15 @@ export const BUSD = new Token(
   18,
   'BUSD',
   'BUSD Token'
+)
+
+
+export const BETH = new Token(
+    ChainId.BSC_MAINNET,
+    '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+    18,
+    'BETH',
+    'Binance-Peg Ethereum Token'
 )
 
 export const DOGE = new Token(
@@ -251,7 +263,7 @@ export const CJAI = new Token(
     '0x26c1a317c4cdea9408bf9a82b4c7645bffdfea21',
     18,
     'CJAI',
-    ' NFT'
+    'CaoJunNFT'
 )
 
 
@@ -414,6 +426,16 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     mobile: true
   }
 }
+
+
+export const tokenOptions = [
+  { id: '1', name: 'BNB',value:ZERO_ADDRESS },
+  { id: '2', name: 'BUSD',value:BUSD.address },
+  { id: '3', name: 'TSA',value:UNI[ChainId.BSC_MAINNET].address },
+  { id: '4', name: 'Shih',value:SHIH.address },
+  { id: '5', name: 'CJAI',value:CJAI.address },
+  { id: '6', name: 'ETH',value:BETH.address}
+]
 
 export const NetworkContextName = 'NETWORK'
 

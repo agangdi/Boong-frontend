@@ -14,7 +14,7 @@ import {
   BNB_BAKE_LP,
   DOGGY,
   SAFEMOON,
-  BNB_SHIH_LP, BUSD_SHIH_LP
+  BNB_SHIH_LP, BUSD_SHIH_LP, B_USDT, USDT_SHIH_LP, BNB_BUSD_LP, BNB_ETH_LP, BNB_WBTC_LP, BNB_TSA_LP
 } from '../../constants'
 import { IDO_ABI_INTERFACE, STAKING_REWARDS_INTERFACE } from '../../constants/abis/staking-rewards'
 import { useActiveWeb3React } from '../../hooks'
@@ -35,6 +35,46 @@ export const STAKING_REWARDS_INFO: {
   }[]
 } = {
   [ChainId.BSC_MAINNET]: [
+    {
+      tokens: [BNB_TSA_LP, UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress: '0xA1f2Bc4cBB56b02cB1329C8ca633155c02Fc6Cb8',
+      iconUrl: "/bnbtsastaketsa.png"
+    },
+    {
+      tokens: [SHIH,UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress:'0xB2919b8d401dEA262B1E62876Fa1B7aAc287B05E',
+      iconUrl: "/shih_TSA_icon.png"
+    },
+    {
+      tokens:[BNB_BUSD_LP, UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress: '0x787B60d70b997Cdae2a4475aeCD4a94E3111c0F7',
+      iconUrl:"/BNB_BUSD.png"
+    },
+    {
+      tokens:[BNB_ETH_LP, UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress: '0x870c010312AB1914eD3c21C3CdA51f7464f17c13',
+      iconUrl:"/BNB_ETH.png"
+    },
+    {
+      tokens:[BNB_WBTC_LP, UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress: '0x72318628bBA4Bc395713eE9B0c96b19814d3AeC0',
+      iconUrl:"/BNB_WBTC.png"
+    },
+    {
+      tokens:[B_USDT, UNI[ChainId.BSC_MAINNET]],
+      stakingRewardAddress: '0x7964E3aAC5D7E0F4b6d70d9758365fC935EeD17f',
+      iconUrl:"/USDT_TSA.png"
+    },
+    {
+      tokens:[USDT_SHIH_LP, SHIH],
+      stakingRewardAddress: '0x7FFCC2AeBE2AC2008D23B23A33A707038a9d0003',
+      iconUrl:"/USDT_SHIH.png"
+    },
+    {
+      tokens:[CJAI, SHIH],
+      stakingRewardAddress: '0x46c292ae7946d730F76163DF633578E2dE13049c',
+      iconUrl:"/CJAI_SHIH.png"
+    },
     {
       tokens:[BUSD_SHIH_LP, UNI[ChainId.BSC_MAINNET]],
       stakingRewardAddress: '0x1162f2D625Cb80f713e941d1aC3d7f0D34109aec',
@@ -68,7 +108,7 @@ export const STAKING_REWARDS_INFO: {
     // 0xfE93a00Cf957ba4DC84dF48AC698505e7E17F631 stakeBNB()
     // 0xb71fa06476fC11dd160A2D6B06A5B5797C03a096 stake()
     // {
-    //   tokens: [USDT_BC_LP, UNI[ChainId.BSC_MAINNET]],
+    //   tokens: [USDT_TSA_LP, UNI[ChainId.BSC_MAINNET]],
     //   stakingRewardAddress: '0xbD1308B84f0648aa89B7AcB1039767d52CF4Dc17'
     // },
     {
@@ -123,9 +163,12 @@ export const IFO_REWARDS_INFO: {
   [ChainId.BSC_MAINNET]: [
     {
       tokens: [PAYABLEETH[ChainId.BSC_MAINNET], UNI[ChainId.BSC_MAINNET]],
+      idoAddress: '0x887Ed22FAF9C4B985ecB019eA54A5185350AE214'
+    },
+    {
+      tokens: [PAYABLEETH[ChainId.BSC_MAINNET], UNI[ChainId.BSC_MAINNET]],
       idoAddress: '0xF72ECaD992CebB0138aC13b616199f131F847b04'
     }
-
   ]
 }
 
@@ -141,6 +184,7 @@ export interface StakingInfo {
   earnedAmount: TokenAmount
   // the total amount of token staked in the contract
   totalStakedAmount: TokenAmount
+  unclaimAmount:TokenAmount
   // the amount of token distributed per second to all LPs, constant
   totalRewardRate: TokenAmount
   // the current amount of token distributed to the active account per second.
@@ -211,6 +255,7 @@ export function useStakingInfo(stakingRewardAddress?:string | null): StakingInfo
   // get all the info from the staking rewards contracts
   const balances = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'balanceOf', accountArg)
   const earnedAmounts = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'earned', accountArg)
+  const unClaimedAmounts = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'rewards', accountArg)
   const totalSupplies = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'totalSupply')
 
   // const startTimes = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'startTime')
@@ -238,6 +283,7 @@ export function useStakingInfo(stakingRewardAddress?:string | null): StakingInfo
       // these two are dependent on account
       const balanceState = balances[index]
       const earnedAmountState = earnedAmounts[index]
+      const unclaimedAmountState = unClaimedAmounts[index]
 
       // these get fetched regardless of account
       const totalSupplyState = totalSupplies[index]
@@ -263,6 +309,7 @@ export function useStakingInfo(stakingRewardAddress?:string | null): StakingInfo
         if (
           balanceState?.error ||
           earnedAmountState?.error ||
+            unclaimedAmountState.error||
           totalSupplyState.error ||
           rewardRateState.error ||
           periodFinishState.error||
@@ -282,6 +329,7 @@ export function useStakingInfo(stakingRewardAddress?:string | null): StakingInfo
         // const stakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(balanceState?.result?.[0] ?? 0))
         // const totalStakedAmount = new TokenAmount(dummyPair.liquidityToken, JSBI.BigInt(totalSupplyState.result?.[0]))
         const stakedAmount = new TokenAmount(tokens[0], JSBI.BigInt(balanceState?.result?.[0] ?? 0))
+        const unClaimedAmount = new TokenAmount(tokens[1],JSBI.BigInt(unclaimedAmountState?.result?.[0] ?? 0))
         const totalStakedAmount = new TokenAmount(tokens[0], JSBI.BigInt(totalSupplyState.result?.[0]))
 
 
@@ -313,6 +361,7 @@ export function useStakingInfo(stakingRewardAddress?:string | null): StakingInfo
           iconUrl: info[index].iconUrl,
           periodFinish: periodFinishMs > 0 ? new Date(periodFinishMs) : undefined,
           earnedAmount: new TokenAmount(info[index].tokens[1], JSBI.BigInt(earnedAmountState?.result?.[0] ?? 0)),
+          unclaimAmount:unClaimedAmount,
           rewardRate: individualRewardRate,
           totalRewardRate: totalRewardRate,
           stakedAmount: stakedAmount,
@@ -392,6 +441,42 @@ export function useDerivedIdoInfo(
     parsedInput && userLiquidityUnstaked && JSBI.lessThanOrEqual(parsedInput.raw, userLiquidityUnstaked.raw)
       ? parsedInput
       : undefined
+
+  let error: string | undefined
+  if (!account) {
+    error = t('connectWallet')
+  }
+  if (!parsedAmount) {
+    error = error ?? t('enterAnAmount')
+  }
+
+  return {
+    parsedAmount,
+    error
+  }
+}
+
+export function useDerivedBidInfo(
+    typedValue: string,
+    makeToken: Token,
+    userLiquidityUnstaked: TokenAmount| CurrencyAmount | undefined
+): {
+  parsedAmount?: CurrencyAmount
+  error?: string
+} {
+  const { account } = useActiveWeb3React()
+  const { t } = useTranslation()
+
+  const parsedInput: CurrencyAmount | undefined = tryParseAmount(typedValue, makeToken)
+
+  const parsedAmount =
+      parsedInput && userLiquidityUnstaked && JSBI.lessThanOrEqual(parsedInput.raw, userLiquidityUnstaked.raw)
+          ? parsedInput
+          : undefined
+
+  console.log("typevalue:"+typedValue )
+  console.log("makeToken"+JSON.stringify(makeToken))
+  console.log("parsedAmount"+JSON.stringify(parsedAmount))
 
   let error: string | undefined
   if (!account) {

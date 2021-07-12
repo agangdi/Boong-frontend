@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { useState} from 'react';
 import {
   selectUsers,
   selectProducts,
@@ -8,6 +8,7 @@ import {
   selectMail,
   getUnCheckProducts,
   updateProductStatus,
+  updateProductsOrderid,
   getUsers,
   searchUsers,
   getProducts,
@@ -36,25 +37,59 @@ export default function useAdmin() {
     order: 'DESC',
   });
 
+
+  const [passedProduct,setPassedProduct] = useState({});
+
+  
+  var [passedProducts, setPassedProducts] = useState([]);
+
+
+  // const pProducts = useMemo(()=>{
+  //   if(passedProducts.length!=0){
+  //     return passedProducts
+  //   }
+  //   return []
+  // },[passedProducts])
+
   const handleGetUnCheckProducts = (page) =>
-    dispatch(getUnCheckProducts(page)).then((result) => result);
+    getUnCheckProducts(page)(dispatch).then((result) => result);
   const handleUpdateProductStatus = (id, status) =>
-    dispatch(updateProductStatus(id, status)).then((result) => result);
+    updateProductStatus(id, status)(dispatch).then((result) => result);
+  const handleUpdateProductsOrderid = (ids, orderids) =>
+      updateProductsOrderid(ids, orderids)(dispatch).then((result) => result);
   const handleGetUsers = (params) =>
-    dispatch(getUsers(params)).then((result) => result);
+    getUsers(params)(dispatch).then((result) => result);
   const handleSearchUsers = (keyword) =>
-    dispatch(searchUsers(keyword)).then((result) => result);
+    searchUsers(keyword)(dispatch).then((result) => result);
   const handleGetProducts = (params) =>
-    dispatch(getProducts(params)).then((result) => result);
+    getProducts(params)(dispatch).then((result) => result);
   const handleSearchProducts = (params) =>
-    dispatch(searchProducts(params)).then((result) => result);
-  const handleGetMails = () => dispatch(getMails()).then((result) => result);
+    searchProducts(params)(dispatch).then((result) => result);
+  const handleGetMails = () => getMails()(dispatch).then((result) => result);
+
+  // const handleUpdateOrderid = (addresses,tokenids,orderids) => {
+  //
+  //   handleUpdateProductsOrderid(product.id, status);
+  // };
+
 
   const handleChangeSelector = (e, product) => {
     setValue(e.target.value);
     setIsChecked(true);
     const status = e.target.value === '通過' ? '1' : '2';
-    handleUpdateProductStatus(product.id, status);
+    if(status === '1'){
+      // const newPasseds =  passedProducts
+      // newPasseds.push(product)
+      // setPassedProducts(newPasseds)
+      // // passedProducts.push(product)
+      setPassedProduct(product)
+      // passedProducts.push(product)
+      // setPassedProducts(passedProducts)
+    // }else{
+    //   setPassedProducts(passedProducts.filter(v => v.id != product.id))
+    }
+    // product.status = status
+    // handleUpdateProductStatus(product.id, status);
   };
 
   const handleSearchingUsers = (value) => {
@@ -101,6 +136,7 @@ export default function useAdmin() {
     keyword,
     params,
     productParams,
+    passedProduct,
     isChecked,
     isSearch,
     setProductParams,
@@ -109,6 +145,7 @@ export default function useAdmin() {
     setIsChecked,
     setKeyword,
     setParams,
+    setPassedProduct,
     handleGetUnCheckProducts,
     handleUpdateProductStatus,
     handleGetUsers,
@@ -119,5 +156,7 @@ export default function useAdmin() {
     handleChangeSelector,
     handleSearchingUsers,
     handleSearchingProducts,
+    handleUpdateProductsOrderid,
+    passedProducts, setPassedProducts
   };
 }

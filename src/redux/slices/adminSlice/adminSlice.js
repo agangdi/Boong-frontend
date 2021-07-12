@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  getUnCheckProducBCPI,
+  getUnCheckProductsAPI,
   updateProductStatusAPI,
   getUsersAPI,
   searchUsersAPI,
-  getProducBCPI,
-  searchProducBCPI,
+  getProductsAPI,
+  searchProductsAPI,
   getMailsAPI,
+  updateProductsOrderidAPI
 } from '../../../webAPI/adminAPI';
 
 export const adminSlice = createSlice({
@@ -53,7 +54,7 @@ export const {
 export const getUnCheckProducts = (page) => (dispatch) => {
   dispatch(setProducts([]));
   dispatch(setErrorMessage(''));
-  return getUnCheckProducBCPI(page).then((result) => {
+  return getUnCheckProductsAPI(page).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
@@ -69,6 +70,17 @@ export const updateProductStatus = (id, status) => (dispatch) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
+      );
+    return result;
+  });
+};
+
+export const updateProductsOrderid = (ids, orderids) => (dispatch) => {
+  dispatch(setErrorMessage(''));
+  return updateProductsOrderidAPI(ids, orderids).then((result) => {
+    if (!result || result.ok === 0)
+      return dispatch(
+          setErrorMessage(result ? result.message : 'something wrong')
       );
     return result;
   });
@@ -102,7 +114,7 @@ export const searchUsers = (keyword) => (dispatch) => {
 
 export const getProducts = (params) => (dispatch) => {
   dispatch(setErrorMessage(''));
-  return getProducBCPI(params).then((result) => {
+  return getProductsAPI(params).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
@@ -115,7 +127,7 @@ export const getProducts = (params) => (dispatch) => {
 
 export const searchProducts = (params) => (dispatch) => {
   dispatch(setErrorMessage(''));
-  return searchProducBCPI(params).then((result) => {
+  return searchProductsAPI(params).then((result) => {
     if (!result || result.ok === 0)
       return dispatch(
         setErrorMessage(result ? result.message : 'something wrong')
