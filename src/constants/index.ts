@@ -15,7 +15,7 @@ type ChainTokenList = {
 
 export const DAI = new Token(ChainId.MAINNET, '0x6B175474E89094C44Da98b954EedeAC495271d0F', 18, 'DAI', 'Dai Stablecoin')
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
-export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
+export const USDT = new Token(ChainId.BSC_MAINNET, '0x55d398326f99059ff775485246999027b3197955', 6, 'USDT', 'Tether USD')
 export const COMP = new Token(ChainId.MAINNET, '0xc00e94Cb662C3520282E6f5717214004A7f26888', 18, 'COMP', 'Compound')
 export const MKR = new Token(ChainId.MAINNET, '0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2', 18, 'MKR', 'Maker')
 export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A5d5039A161', 9, 'AMPL', 'Ampleforth')
@@ -76,11 +76,11 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {
 }
 
 export const NFTFACTORY: { [chainId in ChainId]?: string } = {
-  [ChainId.BSC_MAINNET]:'0x11f611A84e2DAd9445bd2eFfA3680C8A6e5f05b0'
+  [ChainId.BSC_MAINNET]:'0x04E441d700f509e16e6A30ea43A72a847822A74c'
 }
 
 export const NFTEXCHANGE: { [chainId in ChainId]?: string } = {
-  [ChainId.BSC_MAINNET]:'0x50F1DE017f1Dd26d12B93471574F88E82B6007B1'
+  [ChainId.BSC_MAINNET]:'0x02CEA7135C95c66fC6833a7DC15A4BBc04468375'
 }
 
 //0x35026E7EA11824c832D9C73449dd333cBcd1c674
@@ -192,6 +192,14 @@ export const BETH = new Token(
     18,
     'BETH',
     'Binance-Peg Ethereum Token'
+)
+
+export const DOT = new Token(
+    ChainId.BSC_MAINNET,
+    '0x7083609fce4d1d8dc0c979aab8c869ea2c873402',
+    18,
+    'DOT',
+    'Binance-Peg DOT'
 )
 
 export const DOGE = new Token(
@@ -431,10 +439,10 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
 export const tokenOptions = [
   { id: '1', name: 'BNB',value:ZERO_ADDRESS },
   { id: '2', name: 'BUSD',value:BUSD.address },
-  { id: '3', name: 'TSA',value:UNI[ChainId.BSC_MAINNET].address },
-  { id: '4', name: 'Shih',value:SHIH.address },
-  { id: '5', name: 'CJAI',value:CJAI.address },
-  { id: '6', name: 'ETH',value:BETH.address}
+  { id: '3', name: 'BC',value:UNI[ChainId.BSC_MAINNET].address },
+  { id: '4', name: 'DOT',value:DOT.address },
+  // { id: '5', name: 'CJAI',value:CJAI.address },
+  { id: '5', name: 'ETH',value:BETH.address}
 ]
 
 export const NetworkContextName = 'NETWORK'

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useActiveWeb3React } from '../../../hooks';
 // import {PAYABLEETH, ZERO_ADDRESS} from "../../../constants";
 import {ChainId} from "@teaswap/uniswap-sdk";
-import { ZERO_ADDRESS, BUSD, UNI} from "../../../constants";
+import {ZERO_ADDRESS, BUSD, UNI, DOT, BETH} from "../../../constants";
 import {useNFTLastId, useUserFirstToken} from "../../../state/wallet/hooks";
 // import {SubmittedView} from "../../../components/ModalViews";
 // import {AutoColumn} from "../../../components/Column";
@@ -279,8 +279,9 @@ const PostProductPage = () => {
     { id: '1', name: 'BNB',value:ZERO_ADDRESS },
     { id: '2', name: 'BUSD',value:BUSD.address },
     { id: '3', name: 'BC',value:UNI[ChainId.BSC_MAINNET].address },
-    // { id: '4', name: 'Shih',value:SHIH.address },
+    { id: '4', name: 'DOT',value:DOT.address },
     // { id: '5', name: 'CJAI',value:CJAI.address },
+    { id: '5', name: 'ETH',value:BETH.address}
   ]
 
   const mediaTypeOptions = [
