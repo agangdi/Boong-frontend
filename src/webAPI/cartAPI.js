@@ -1,5 +1,7 @@
 import { BASE_URL } from "../constants/unit";
 import { getAuthToken } from "../NFTutils";
+import {completeOrder as completeOrderAPI} from "./orderAPI";
+import {setIsLoading} from "../redux/slices/orderSlice/orderSlice";
 
 // 取得購物車內的商品
 export const getItem = () => {
@@ -13,7 +15,7 @@ export const getItem = () => {
   }).then((res) => res.json());
 };
 // 加入商品到購物車
-export const addItem = (productId, quantity, id,price) => {
+export const addItem = (productId, quantity, id,price,noworderid) => {
   const token = getAuthToken();
   return fetch(`${BASE_URL}/carts/cart-items/new`, {
     method: "POST",
@@ -25,7 +27,8 @@ export const addItem = (productId, quantity, id,price) => {
       productId,
       quantity,
       id,
-      price
+      price,
+      noworderid
     }),
   }).then((res) => res.json());
 };
@@ -76,5 +79,17 @@ export const createOrder = (readyToOrderItems) => {
       authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(readyToOrderItems),
+  }).then((res) => res.json());
+};
+// 訂單完成
+export const
+    completeOrder = (id) => {
+  const token = getAuthToken();
+  return fetch(`${BASE_URL}/orders/${id}/complete`, {
+    method: "PATCH",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   }).then((res) => res.json());
 };

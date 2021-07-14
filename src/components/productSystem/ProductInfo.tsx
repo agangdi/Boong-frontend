@@ -11,7 +11,7 @@ import {createOrder} from '../../redux/slices/cartSlice/cartSlice'
 import {ButtonConfirmed, ButtonError} from '../Button';
 import {useTransactionAdder} from "../../state/transactions/hooks";
 import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback";
-import {BETH, BUSD, CJAI, DOT, NFTEXCHANGE, PAYABLEETH, SHIH, UNI, ZERO_ADDRESS} from "../../constants";
+import {BETH, BUSD, NFTEXCHANGE, PAYABLEETH, ZERO_ADDRESS} from "../../constants";
 import {TransactionResponse} from "@ethersproject/providers";
 import {useETHBalances, useTokenBalance} from "../../state/wallet/hooks";
 import {ChainId, ETHER, JSBI} from "@teaswap/uniswap-sdk";
@@ -255,9 +255,6 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
   const tokenOptions = [
     { name: 'BNB',address:ZERO_ADDRESS,token:PAYABLEETH[ChainId.BSC_MAINNET] },
     { name: 'BUSD',address:BUSD.address,token:BUSD },
-    { name: 'DOT',address:DOT.address,token:DOT },
-    { name: 'Shih',address:SHIH.address,token:SHIH },
-    { name: 'CJAI',address:CJAI.address,token:CJAI },
     { name: 'ETH',address:BETH.address,token:BETH }
   ]
   const {

@@ -6,10 +6,13 @@ import {
   setProducts,
   setSort,
   selectVendorInfo,
+  selectCreator,
   selectSort,
   selectProductCount,
   selectProductCategories,
   selectProduct,
+  selectProductCarts,
+  selectProductOrders,
   selectProducts,
   selectPage,
   selectCategory,
@@ -21,7 +24,18 @@ import {
   getProductsFromCategory,
   getProductsFromVendor,
   getUserById,
+  selectUserCreated,
+  selectUserSold,
 } from '../../redux/slices/productSlice/productSlice';
+
+import { tokenOptions} from "../../constants";
+
+import {useMultipleContractSingleData} from "../../state/multicall/hooks";
+import {STAKING_REWARDS_INTERFACE} from "../../constants/abis/staking-rewards";
+import {BUSD, CJAI, NFTEXCHANGE, SHIH, UNI, ZERO_ADDRESS,BETH} from "../../constants";
+import {ChainId} from "@teaswap/uniswap-sdk";
+import { setErrorMessage } from '../../state/user/actions';
+
 
 function averageTime(count, products) {
   let totalTime = 0;
@@ -40,10 +54,15 @@ export default function useProduct() {
   const dispatch = useDispatch();
   const page = useSelector(selectPage);
   const vendorInfo = useSelector(selectVendorInfo);
+  const Creator = useSelector(selectCreator);
   const productCategories = useSelector(selectProductCategories);
   const product = useSelector(selectProduct);
+  const productCarts = useSelector(selectProductCarts);
+  const productOrders = useSelector(selectProductOrders);
   const products = useSelector(selectProducts);
   const productCount = useSelector(selectProductCount);
+  const userCreated = useSelector(selectUserCreated);
+  const userSold = useSelector(selectUserSold);
   const category = useSelector(selectCategory);
   const productErrorMessage = useSelector(selectErrorMessage);
   const averageShippingTime = averageTime(products.length, products);
@@ -57,20 +76,27 @@ export default function useProduct() {
     setLoaded(true);
   };
 
+  // const handleGETHasNFT = (string) => {
+  //   const earnedAmounts = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'earned', accountArg)
+  //   const totalSupplies = useMultipleContractSingleData(rewardsAddresses, STAKING_REWARDS_INTERFACE, 'totalSupply')
+  // }
+
   const handleGetProduct = (id, page) => {
     dispatch(setPage(page));
     (getProduct(id)(dispatch)).then((res) => {
-      if (!res.product || Number(res.product.status) !== 1) {
+      if (!res.product || ![0, 1, 3].includes(Number(res.product.status))) {
         return navigate('/');
       }
       (getProductsFromVendor(res.vendorInfo.id, page, 4)(dispatch)).then(
         (products) => {
+          console.log('getProductsFromVendor', products)
           let tempProducts = products.filter((product) => {
             return product.id !== Number(id);
           });
           if (tempProducts.length > 3) {
             tempProducts.pop();
           }
+          console.log('getProductsFromVendor tempProducts', tempProducts)
           return dispatch(setProducts(tempProducts));
         }
       );
@@ -89,13 +115,15 @@ export default function useProduct() {
     searchProduct(keyword, page)(dispatch);
   };
 
-  const handleGetProductFromCategory = (id) => {
-    getProductsFromCategory(id, 1)(dispatch);
+  const handleGetProductFromCategory = (id, page) => {
+    dispatch(setPage(page));
+    getProductsFromCategory(id, page)(dispatch);
   };
 
-  const handleGetProductsFromVendor = (id, page) => {
+  const handleGetProductsFromVendor = (id, page, type) => {
+    setErrorMessage('')
     dispatch(setPage(page));
-    (getProductsFromVendor(id, page, 10)(dispatch)).then((res) => {
+    (getProductsFromVendor(id, page, 9, type)(dispatch)).then((res) => {
       if (res.message === 'not a Vendor') navigate('/nft');
     });
   };
@@ -134,18 +162,37 @@ export default function useProduct() {
   const handleGetUserById = (id) => {
     getUserById(id)(dispatch);
   };
+  
+  const handleTokenSwitch = (extoken) => {
+
+    if (!extoken) return;
+
+    let extokenName = 'TSA'
+    for(let i = 0 ;i<tokenOptions.length;i++){
+        if(tokenOptions[i].value === extoken){
+            extokenName=tokenOptions[i].name
+            break
+        }
+    }
+    return extokenName
+  }
 
   return {
     page,
     loaded,
     isShowContact,
     vendorInfo,
+    Creator,
     productCategories,
     averageShippingTime,
     product,
+    productCarts,
+    productOrders,
     products,
     category,
     productCount,
+    userCreated,
+    userSold,
     productErrorMessage,
 
     setPage,
@@ -167,5 +214,6 @@ export default function useProduct() {
     handleGetProductsFromVendor,
     handleChangeProductSort,
     handleGetUserById,
+    handleTokenSwitch
   };
 }
