@@ -154,7 +154,7 @@ export default function VendorInfoForm({ successMode, setSuccessMode, isAdminSta
           value={instagram}
           onChange={(e) => setInstagram(e.target.value)}
         />
-        <InputName>{t("Your profile link on TeaSwap or the address you minted artworks on TeaSwap")}</InputName>
+        <InputName>{t("Your profile link on Boong or the address you minted artworks on Boong")}</InputName>
         <InputComponent
           type='text'
           name='profile'
