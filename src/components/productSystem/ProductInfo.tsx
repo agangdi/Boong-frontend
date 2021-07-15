@@ -11,7 +11,7 @@ import {createOrder} from '../../redux/slices/cartSlice/cartSlice'
 import {ButtonConfirmed, ButtonError} from '../Button';
 import {useTransactionAdder} from "../../state/transactions/hooks";
 import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback";
-import {BETH, BUSD, NFTEXCHANGE, PAYABLEETH, ZERO_ADDRESS} from "../../constants";
+import {BETH, BUSD, CJAI, NFTEXCHANGE, PAYABLEETH, SHIH, UNI, ZERO_ADDRESS} from "../../constants";
 import {TransactionResponse} from "@ethersproject/providers";
 import {useETHBalances, useTokenBalance} from "../../state/wallet/hooks";
 import {ChainId, ETHER, JSBI} from "@teaswap/uniswap-sdk";
@@ -251,10 +251,14 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
   // const { user } = useOrder();
   const [bidValue, setBidValue] = useState('');
   const [isBiding, setIsBiding] = useState(false);
-  const [, setWitch] = useState(0);
+  const [whitch, setWhitch] = useState(0);
+  console.log(whitch)
   const tokenOptions = [
     { name: 'BNB',address:ZERO_ADDRESS,token:PAYABLEETH[ChainId.BSC_MAINNET] },
     { name: 'BUSD',address:BUSD.address,token:BUSD },
+    { name: 'TSA',address:UNI[ChainId.BSC_MAINNET].address,token:UNI[ChainId.BSC_MAINNET] },
+    { name: 'Shih',address:SHIH.address,token:SHIH },
+    { name: 'CJAI',address:CJAI.address,token:CJAI },
     { name: 'ETH',address:BETH.address,token:BETH }
   ]
   const {
@@ -283,7 +287,7 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
 
   const handlebidModal = (which:number)=>{
     setIsBiding(true);
-    setWitch(which);
+    setWhitch(which);
   };
 
   const [approvalSubmitted, setApprovalSubmitted] = useState(false)
