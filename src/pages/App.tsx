@@ -246,7 +246,7 @@ export default function App() {
 
                 <Route path={'/orders'}>
                   <Route path={':id'} element={<OrderDetailPage/>}/>
-                  <Route path={'/client'} element={<ClientOrdersPage/>}/>
+                  <Route path={'/'} element={<ClientOrdersPage/>}/>
                   <Route path={'/vendor'} element={<VendorOrdersPage/>}/>
                 </Route>
 

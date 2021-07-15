@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {
   getUser,
-  getClientOrder,
 } from "../../../redux/slices/orderSlice/orderSlice";
 import { ThickNavPage } from "../../../components/Page";
 import { getAuthToken } from "../../../NFTutils";
@@ -16,6 +15,12 @@ import {
   MEDIA_QUERY_MD,
   DISTANCE,
 } from "../../../constants/style";
+import Tabs from '../../../components/Tabs/Index'
+import useCart from "../../../hooks/cartHooks/useCart";
+import CartItem from "../../../components/cartSystem/CartItem";
+import useProduct from "../../../hooks/productHooks/useProduct";
+import { truncStr } from '../../../utils/strUtil'
+import { useTranslation } from "react-i18next";
 
 const Title = styled.p`
   color: ${COLOR.black};
@@ -28,7 +33,7 @@ const Message = styled.p`
   text-align: center;
 `;
 const Container = styled.p`
-  margin: 200px auto;
+  margin: 50px auto;
   width: 80%;
   padding: ${DISTANCE.xs};
   min-width: ${MEDIA_QUERY_MD.md};
@@ -39,7 +44,6 @@ const Table = styled.table`
   text-align: center;
   table-layout: fixed;
   border-collapse: collapse;
-  margin-top: ${DISTANCE.lg};
 `;
 const NameContainer = styled.tr``;
 const Name = styled.th`
@@ -81,53 +85,89 @@ const LoadingMessage = styled.div`
 
 const ClientOrdersPage = () => {
   const dispatch = useDispatch();
-  const { orders, formatter, isLoading } = useOrder();
+  const {
+    carts,
+    handleGetCart,
+  } = useCart();
+
+  const { 
+    orders, 
+    handleGetClientOrder,
+    handleGetSellerOrder
+  } = useOrder();
+
+  const { handleTokenSwitch } = useProduct()
+
   useEffect(() => {
     if (getAuthToken()) {
       getUser()(dispatch);
     }
   }, [dispatch]);
   useEffect(() => {
-    getClientOrder()(dispatch);
+    handleGetCart();
   }, [dispatch]);
+
+  const BID_TAB = 'Bidding Orders'
+  const SALE_TAB = 'Sales History'
+  const BUY_TAB = 'Purchase History'
+
+  const tabs = [BID_TAB, SALE_TAB, BUY_TAB]
+  const [tab, setTab] = useState(BID_TAB)
+  const { t } = useTranslation();
 
   return (
     <>
-      <ThickNavPage>
+      <ThickNavPage style={{
+        width: '1400px',
+        overflow: 'scroll'
+      }}>
         <Container>
-          <Title>訂單查詢</Title>
-          {isLoading ? (
-            <LoadingMessage>
-              <LoopCircleLoading />;
-            </LoadingMessage>
-          ) : !orders || orders.length === 0 ? (
-            <Message>訂單查詢</Message>
-          ) : (
+          <Tabs tabs={tabs} value={tab} handleChange={(v) => {
+            switch(v){
+              case BID_TAB:
+                handleGetCart()
+                break;
+              case SALE_TAB:
+                handleGetSellerOrder()
+                break;
+              case BUY_TAB:
+                handleGetClientOrder()
+            }
+            setTab(v)
+          }} />
+          {tab == BID_TAB && carts && (
+              carts.map((cart, index) => (
+                <CartItem key={'cart' + index} cart={cart} />
+              ))
+          )}
+          { tab != BID_TAB && (
             <Table>
               <NameContainer>
-                <Name>編號</Name>
-                <Name>成立日期</Name>
-                <Name>總金額</Name>
-                <Name>狀態</Name>
+                <Name>{t('Item')}</Name>
+                <Name>{t("Order-No")}</Name>
+                <Name>{t("Buyer")}</Name>
+                <Name>{t("Seller")}</Name>
+                <Name>{t("Date")}</Name>
+                <Name>{t("Amount")}</Name>
+                <Name>{t("Status")}</Name>
               </NameContainer>
               {orders &&
                 orders.map((order) => (
-                  <ContentContainer key={order.id}>
-                    <OrderContent to={`/orders/${order.id}`}>
-                      {order.order_number}
-                    </OrderContent>
-                    <Content>
-                      {new Date(order.createdAt).toLocaleDateString()}
-                    </Content>
-                    <Content>{formatter.format(order.total_amount)}</Content>
-                    <Content>
-                      {order.is_canceled
-                        ? "已取消"
-                        : order.is_sent
-                        ? "已出貨"
-                        : "未出貨"}
-                    </Content>
-                  </ContentContainer>
+                  order.Order_items.map((item) => (
+                    <ContentContainer key={order.id}>
+                      <img src={order.Order_items[0].product_picture_url} width="100" height="100" />
+                      <Content> {order.order_number} </Content>
+                      <Content> {truncStr(order.client_name)} </Content>
+                      <Content> {truncStr(order.seller_name)} </Content>
+                      <Content>
+                        {new Date(order.createdAt).toLocaleDateString()}
+                      </Content>
+                      <Content>{item.product_price + handleTokenSwitch(item.Product.extoken)}</Content>
+                      <Content>
+                        {order.is_completed ? '已完成' : '未完成' }
+                      </Content>
+                    </ContentContainer>
+                  ))
                 ))}
             </Table>
           )}

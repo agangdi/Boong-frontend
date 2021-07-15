@@ -71,9 +71,9 @@ const UsersItem = ({ user }) => {
           {user.status === 0 ? '正常' : '停權'}
         </PermissionText>
       </UserTd>
-      <UserTd>
+      {/* <UserTd>
         <Nav children={'編輯'} path={`/nft/users/vendor/${user.id}`} />
-      </UserTd>
+      </UserTd> */}
     </UserTr>
   );
 };
@@ -101,7 +101,7 @@ export default function ManageUsers() {
               <UserTh>名稱</UserTh>
               <UserTh>賣家頁面</UserTh>
               <UserTh>權限</UserTh>
-              <UserTh>詳細資訊</UserTh>
+              {/* <UserTh>詳細資訊</UserTh> */}
             </UserTr>
           </UsersThead>
           <UsersTbody>

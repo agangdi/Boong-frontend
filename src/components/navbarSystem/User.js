@@ -117,12 +117,7 @@ export default function User() {
               </OptionItem>
             )}
             <OptionItem>
-              <OptionName onClick={() => navigate('/nft/users/me')}>
-                Edit
-              </OptionName>
-            </OptionItem>
-            <OptionItem>
-              <OptionName onClick={() => navigate('/nft/orders/client')}>
+              <OptionName onClick={() => navigate('/nft/orders')}>
                 History
               </OptionName>
             </OptionItem>
@@ -130,13 +125,6 @@ export default function User() {
               <OptionItem>
                 <OptionName onClick={() => navigate('/nft/users/apply')}>
                   To be Vendor
-                </OptionName>
-              </OptionItem>
-            )}
-            {isVendor && (
-              <OptionItem>
-                <OptionName onClick={() => navigate('/nft/orders/vendor')}>
-                  Sell
                 </OptionName>
               </OptionItem>
             )}
