@@ -218,32 +218,7 @@ html, body{
   right: 10px;
   cursor: pointer;
 }
-.page-tabs{
-  width: 100%;
-  max-width: 1320px;
-  margin: 0 auto;
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding:0 20px;
-}
-.page-tab{
-  margin-right: 30px;
-  color: #7f7f7f;
-  font-size: 13px;
-  cursor: pointer;
-  padding: 10px 30px;
-}
-.page-tab:hover {
-  color: #474747;
-  background: #ccc;
-  transition: all 0.5s;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -ms-transition: all 0.5s;
-  -o-transition: all 0.5s;
-}
+
 .btn-sm-100{
   width: 160px;
   font-size: 13px;
