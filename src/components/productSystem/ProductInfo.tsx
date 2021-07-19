@@ -258,7 +258,9 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
     { name: 'DOT',address:DOT.address,token:DOT },
     { name: 'Shih',address:SHIH.address,token:SHIH },
     { name: 'CJAI',address:CJAI.address,token:CJAI },
-    { name: 'ETH',address:BETH.address,token:BETH }
+    { name: 'ETH',address:BETH.address,token:BETH },
+    { name: 'BC',address:UNI[ChainId.BSC_MAINNET].address,token:UNI[ChainId.BSC_MAINNET] }
+
   ]
   const {
     errorMessage,

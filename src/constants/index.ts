@@ -46,7 +46,7 @@ export const PROPOSAL_LENGTH_IN_DAYS = 7
 
 export const GOVERNANCE_ADDRESS = '0x5e4be8Bc9637f0EAA1A755019e06A68ce081D58F'
 
-const UNI_ADDRESS = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'
+const UNI_ADDRESS = '0x34731834778cFF1955A454e23D091a081EBBDFE9'
 export const UNI: { [chainId in ChainId]: Token } = {
   [ChainId.MAINNET]: new Token(ChainId.MAINNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
@@ -55,14 +55,14 @@ export const UNI: { [chainId in ChainId]: Token } = {
   [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.BSC_MAINNET]: new Token(
     ChainId.BSC_MAINNET,
-    '0x5f99acf13caff815dd9cb4a415c0fb34e9f4545b',
+    '0x34731834778cFF1955A454e23D091a081EBBDFE9',
     18,
-    'TSA',
-    'TEAsWap.ART'
+    'BC',
+    'Boong Coin'
   ),
   [ChainId.BSC_TESTNET]: new Token(
     ChainId.BSC_TESTNET,
-    '0x36eb1b02cB7Be3ffA1eE7Bd2A3c7D036002730F7',
+    '0x34731834778cFF1955A454e23D091a081EBBDFE9',
     18,
     'BEST',
     'Bestswap'
