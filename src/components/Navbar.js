@@ -127,7 +127,7 @@ const Navbar = () => {
 
         <RightSide>
           <OptionList>
-            {isAdmin && <Nav children={'管理後台'} path={'/nft/admin'} />}
+            {/* {isAdmin && <Nav children={'管理後台'} path={'/nft/admin'} />} */}
             {userId && (
               <>
                 <User />
