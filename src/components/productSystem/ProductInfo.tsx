@@ -1,5 +1,5 @@
 import { COLOR, FONT, DISTANCE } from '../../constants/style';
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import useCart from '../../hooks/cartHooks/useCart';
@@ -9,7 +9,11 @@ import { InfoBlock } from '../../components/productSystem';
 import { useTranslation } from 'react-i18next';
 import {createOrder} from '../../redux/slices/cartSlice/cartSlice'
 import {ButtonConfirmed, ButtonError} from '../Button';
-import {useTransactionAdder} from "../../state/transactions/hooks";
+import {
+  useHasPendingBid,
+  useTransactionAdder,
+  useUserHasSubmittedBid
+} from "../../state/transactions/hooks";
 import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback";
 import {BETH, BUSD, CJAI, NFTEXCHANGE, PAYABLEETH, SHIH, UNI, ZERO_ADDRESS} from "../../constants";
 import {TransactionResponse} from "@ethersproject/providers";
@@ -245,14 +249,20 @@ const Remind = () => {
   );
 };
 
+export enum bidState {
+  UNKNOWN,
+  NOT_BID,
+  PENDING,
+  BIDED
+}
+
 export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:userMiniInterface}) => {
   const dispatch = useDispatch();
   // const {user} = useUser();
   // const { user } = useOrder();
   const [bidValue, setBidValue] = useState('');
   const [isBiding, setIsBiding] = useState(false);
-  const [whitch, setWhitch] = useState(0);
-  console.log(whitch)
+  const [, setWitch] = useState(0);
   const tokenOptions = [
     { name: 'BNB',address:ZERO_ADDRESS,token:PAYABLEETH[ChainId.BSC_MAINNET] },
     { name: 'BUSD',address:BUSD.address,token:BUSD },
@@ -287,7 +297,7 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
 
   const handlebidModal = (which:number)=>{
     setIsBiding(true);
-    setWhitch(which);
+    setWitch(which);
   };
 
   const [approvalSubmitted, setApprovalSubmitted] = useState(false)
@@ -308,6 +318,9 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
   }, [])
 
   const [approval, approveCallback] = useApproveCallback(parsedAmount, NFTEXCHANGE[ChainId.BSC_MAINNET])
+  const pendingBid = useHasPendingBid(product.orderId,bidValue)
+  const {bidSubmitted,} = useUserHasSubmittedBid(product.orderId,bidValue)
+
 
   useEffect(() => {
     if (approval === ApprovalState.PENDING) {
@@ -315,8 +328,13 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
     }
   }, [approval, approvalSubmitted])
 
+  const bState:bidState = useMemo(() => {
+    return !bidSubmitted? pendingBid ? bidState.PENDING : bidState.NOT_BID: bidState.BIDED
+  }, [pendingBid,bidSubmitted])
+
   useEffect(() => {
-    if (attempting && hash) {
+    console.log("bidState:"+bState)
+    if (attempting && hash && bState===bidState.BIDED) {
       if(bidValue === product.price.toString()){
         console.log("product:"+JSON.stringify(product))
         createOrder([{
@@ -330,24 +348,26 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
       }
 
     }
-  }, [attempting, hash])
+  }, [attempting, hash,bState])
 
   // const isArgentWallet = useIsArgentWallet()
   const exContract = useNFTExchangeContract(NFTEXCHANGE[ChainId.BSC_MAINNET])
   async function onBid() {
     setAttempting(true)
+    debugger
     if (exContract && parsedAmount) {
       if (product.extoken===ZERO_ADDRESS){
-        exContract.bidBNB(JSBI.BigInt(product.orderId),{gasLimit: 3500000, value:`0x${parsedAmount.raw.toString(16)}`})
+        exContract.bidBNB(JSBI.BigInt(product.orderId),{gasLimit: 10000000, value:`0x${parsedAmount.raw.toString(16)}`})
             .then((response:TransactionResponse) => {
               addTransaction(response, {
-                summary: t('bid#'+product.orderId)
+                summary: t('bid#'+product.orderId),
+                bid:{orderid:product.orderId,price:bidValue}
               })
               setHash(response.hash)
             })
             .catch((error:any) => {
               setAttempting(false)
-              console.log(error)
+              console.error(error)
             })
       }else{
         if (approval === ApprovalState.APPROVED) {
@@ -355,7 +375,8 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
           exContract.bid(JSBI.BigInt(product.orderId),`0x${parsedAmount.raw.toString(16)}`, { gasLimit: 1000000 })
               .then((response:TransactionResponse) => {
                 addTransaction(response, {
-                  summary: t('bid#'+product.orderId)
+                  summary: t('bid#'+product.orderId),
+                  bid:{orderid:product.orderId,price:bidValue}
                 })
                 setHash(response.hash)
               })
@@ -479,7 +500,7 @@ export const ProductInfo = ({product,user}:{ product:ProductInterface ,user:user
         <ShoppingBuy onClick={handleAlert}>
         {t('Buy Now')}
         </ShoppingBuy>
-        )}
+      )}
       <Remind />
     </ProductInfoContainer>
   );
