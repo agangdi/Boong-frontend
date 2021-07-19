@@ -38,7 +38,7 @@ const HelperButtonWrapper = styled(ButtonWrapper)`
 `;
 
 export const NormalButton = styled(ButtonWrapper)`
-  width: 286px;
+  // width: 286px;
   height: 40px;
   padding: 5px 10px;
   margin: 0px ${(props) => (props.$margin === 0 ? 0 : 20)}px;

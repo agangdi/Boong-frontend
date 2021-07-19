@@ -11,6 +11,9 @@ import {
   completeOrder,
   payOrder,
   cancelOrder,
+  getProductOrders,
+  getClientOrder,
+  getSellerOrder,
   setErrorMessage,
 } from "../../redux/slices/orderSlice/orderSlice";
 import { useParams } from "react-router-dom";
@@ -23,11 +26,7 @@ export default function useOrder() {
   const errorMessage = useSelector(selectError);
   const isLoading = useSelector(selectLoading);
   const mask = useSelector(selectMask);
-  const formatter = new Intl.NumberFormat("zh-TW", {
-    style: "currency",
-    currency: "NTD",
-    minimumFractionDigits: 0,
-  });
+  const formatter = new Intl.NumberFormat();
   const order_number = detailOrder.map(
     (data) => Object.values(data)[11].order_number
   );
@@ -64,6 +63,14 @@ export default function useOrder() {
     (data) => Object.values(data)[11].client_address
   );
 
+  const handleGetClientOrder = () => {
+    getClientOrder()(dispatch)
+  }
+
+  const handleGetSellerOrder = () => {
+    getSellerOrder()(dispatch)
+  }
+
   const handleCloseModal = () => {
     dispatch(setMask(false));
   };
@@ -74,7 +81,7 @@ export default function useOrder() {
     dispatch(sentOrder(id));
     window.location.reload(true);
   };
-  const handleCompleteOrder = () => {
+  const handleCompleteOrder = (id) => {
     dispatch(completeOrder(id));
     window.location.reload(true);
   };
@@ -123,5 +130,7 @@ export default function useOrder() {
     handleModal,
     handleCloseModal,
     handleSubmitCancelReason,
+    handleGetClientOrder,
+    handleGetSellerOrder
   };
 }

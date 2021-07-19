@@ -19,7 +19,7 @@ function changeProductSort(queue) {
   return { sort, order };
 }
 
-const getProducBCPI = (page) => {
+const getProductsAPI = (page) => {
   return fetch(`${BASE_URL}/products?_page=${page}`).then((res) => res.json());
 };
 
@@ -30,20 +30,20 @@ const getProductCategoriesAPI = () => {
 const getProductsFromCategoryAPI = (id, page, queue) => {
   let { sort, order } = changeProductSort(queue);
   return fetch(
-    `${BASE_URL}/products/categories/${id}?_page=${page}&_sort=${sort}&_order=${order}`
+    `${BASE_URL}/products/categories/${id}?_page=${page}&_sort=${sort}&_limit=9&_order=${order}`
   ).then((res) => res.json());
 };
 
-const getProductsFromVendorAPI = (id, page, limit) => {
+const getProductsFromVendorAPI = (id, page, limit, type) => {
   return fetch(
-    `${BASE_URL}/products/vendor/${id}?_page=${page}&_limit=${limit}`
+    `${BASE_URL}/products/vendor/${id}?_page=${page}&_limit=${limit}&_type=${type}`
   ).then((res) => res.json());
 };
 
 const searchProductAPI = (keyword, page, queue) => {
   let { sort, order } = changeProductSort(queue);
   return fetch(
-    `${BASE_URL}/products/search?_keyword=${keyword}&_page=${page}&_sort=${sort}&_order=${order}`
+    `${BASE_URL}/products/search?_keyword=${keyword}&_page=${page}&_limit=9&_sort=${sort}&_order=${order}`
   ).then((res) => res.json());
 };
 
@@ -59,11 +59,14 @@ const postProductAPI = ({
   price,
   quantity,
   delivery, // 出貨方式  0:面交、1:郵寄
-  delivery_location, // 出貨地點的欄位
-  delivery_time, // 備貨時間的欄位
-  payment_method, // 付款方式 0:貨到付款
+  delivery_location,
+  royalty,
+  extoken,
+  mediaType,
   remark, // 備註
+  tokenid
 }) => {
+  debugger
   const token = localStorage.getItem('token');
   return fetch(`${BASE_URL}/products/new`, {
     method: 'POST',
@@ -80,13 +83,30 @@ const postProductAPI = ({
       quantity,
       delivery,
       delivery_location,
-      delivery_time,
-      payment_method,
+      royalty,
+      extoken,
+      mediaType,
       remark,
+      tokenid
     }),
   })
     .then((res) => res.json())
     .then((res) => res);
+};
+
+const setPriceAPI = (id,price)=>{
+  const token = localStorage.getItem('token');
+
+  return fetch(`${BASE_URL}/products/productprice/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      price:price
+    }),
+  }).then((res) => res.json());
 };
 
 const updateProductAPI = (
@@ -99,14 +119,18 @@ const updateProductAPI = (
     price,
     quantity,
     delivery, // 出貨方式  0:面交、1:郵寄
-    delivery_location, // 出貨地點的欄位
-    delivery_time, // 備貨時間的欄位
-    payment_method, // 付款方式 0:貨到付款
+    delivery_location,
+    royalty,
+    extoken,
+    status,
+    mediaType,
     remark, // 備註
+    tokenid
   }
 ) => {
   const token = localStorage.getItem('token');
-
+  if (price <=0) return
+  debugger
   return fetch(`${BASE_URL}/products/${id}`, {
     method: 'PATCH',
     headers: {
@@ -120,11 +144,14 @@ const updateProductAPI = (
       info,
       price,
       quantity,
-      delivery,
+      delivery, // 出貨方式  0:面交、1:郵寄
       delivery_location,
-      delivery_time,
-      payment_method,
-      remark,
+      royalty,
+      extoken,
+      status,
+      mediaType,
+      remark, // 備註
+      tokenid
     }),
   }).then((res) => res.json());
 };
@@ -145,14 +172,14 @@ const postPictureAPI = (formData) => {
   return fetch('https://api.imgur.com/3/image', {
     method: 'POST',
     headers: {
-      Authorization: 'Client-ID 4610c48a0c55b2a',
+      Authorization: 'Client-ID 13c7722407e3240',
     },
     body: formData,
   }).then((res) => res.json());
 };
 
 export {
-  getProducBCPI,
+  getProductsAPI,
   getProductCategoriesAPI,
   getProductsFromCategoryAPI,
   getProductsFromVendorAPI,
@@ -162,4 +189,5 @@ export {
   updateProductAPI,
   deleteProductAPI,
   postPictureAPI,
+  setPriceAPI
 };

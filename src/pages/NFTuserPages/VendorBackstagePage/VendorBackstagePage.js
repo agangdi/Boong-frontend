@@ -122,6 +122,23 @@ const VendorBackstagePage = () => {
         <Announcement handleSetAnnouncement={handleSetAnnouncement} announcement={user?user.description:''} />
 
         <SellerProductTitle className="SellerProductTitle">
+          <div className='page-tabs'>
+            <span className={productCat == 'all' ? 'active-page-tab' : 'page-tab'} onClick={() => changeCat('all')}>
+              In Wallet
+            </span>
+            <span className={productCat == 'sale' ? 'active-page-tab' : 'page-tab'} onClick={() => changeCat('sale')}>
+              On Sale
+            </span>
+            <span className={productCat == 'auction' ? 'active-page-tab' : 'page-tab'} onClick={() => changeCat('auction')}>
+              On Auction
+            </span>
+            <span className={productCat == 'collected' ? 'active-page-tab' : 'page-tab'} onClick={() => changeCat('collected')}>
+              Collected
+            </span>
+            <span className={productCat == 'collected' ? 'active-page-tab' : 'page-tab'} onClick={() => changeCat('created')}>
+              Created
+            </span>
+          </div>
           <div>
             <NavLink style={{ minWidth: 'fit-content' }} to={'/nft'}>
               <NormalButton className="btn-sm-100" >{t('Buy NFT')}</NormalButton>

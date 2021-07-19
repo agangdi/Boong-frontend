@@ -4,25 +4,17 @@ import styled from 'styled-components';
 import useProduct from '../../hooks/productHooks/useProduct';
 import { MEDIA_QUERY } from '../../constants/style';
 import { useTranslation } from 'react-i18next';
+import {truncStr} from '../../utils/strUtil'
 
 const ProductPictureContainer = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
-  margin-bottom: 65px;
-  max-height: 400px;
-  height: auto;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+  justify-content: flex-start;
+  width: 50%;
+  ${MEDIA_QUERY.sm} {
     width: 100%;
-    opacity: ${(props) => (props.loaded ? 0 : 1)};
-    background: url(${process.env.PUBLIC_URL}/logo.svg) center/contain no-repeat;
-    object-fit: cover;
+    padding: 10px;
+    justify-content: center;
   }
 `;
 
@@ -30,16 +22,15 @@ const ProductPictureImg = styled.img`
   position: relative;
   transition: opacity 0.2s;
   width: 80%;
-  max-width: 500px;
-  height: 100%;
-  object-fit: cover;
+  // height: 100%;
+  object-fit: contain;
 `;
 
 export const InfoTitle = styled.div`
   margin: ${DISTANCE.sm} auto;
   padding-bottom: ${DISTANCE.sm};
-  font-size: ${FONT.lg};
-  color: ${COLOR.text_2};
+  font-size: 19px;
+  color: ${COLOR.dark_gray};
   border-bottom: 1px solid ${COLOR.cccccc};
 
   ${MEDIA_QUERY} {
@@ -73,15 +64,17 @@ export const InfoItem = styled.div`
   margin-top: ${DISTANCE.sm};
   display: flex;
   padding-bottom: ${DISTANCE.sm};
+  display: flex;
+  flex-direction: column;
   &:not(:last-child) {
     border-bottom: 1px solid ${COLOR.cccccc};
   }
 `;
 
 export const InfoItemTitle = styled.div`
-  width: 150px;
   padding-right: 20px;
-  font-size: ${FONT.md};
+  padding-bottom: 20px;
+  font-size: 13px;
   color: ${COLOR.text_2};
   word-break: break-all;
 `;
@@ -103,7 +96,7 @@ export const ProductIntro = ({ product }) => {
   const {t} = useTranslation();
   return (
     <>
-      <InfoTitle>{t('Introduction')}</InfoTitle>
+      <InfoTitle>{t('Description')}</InfoTitle>
       <ProductInfoWrap>{product.info}</ProductInfoWrap>
     </>
   );
@@ -111,25 +104,69 @@ export const ProductIntro = ({ product }) => {
 
 export const FreightIntro = ({ product }) => {
   const {t} = useTranslation();
+  const { vendorInfo, Creator, productCarts, productOrders, handleTokenSwitch } = useProduct();
+  console.log('product orders', productOrders)
   return (
     <>
-      <InfoTitle>{t('Item Info')}</InfoTitle>
+      <InfoTitle>{t('Additional Details')}</InfoTitle>
       <InfoItem>
-        <InfoItemTitle>{t('Biding Price')}</InfoItemTitle>
-        <InfoBlock>{product.delivery === '0' ? t('Bid') : t('Auction')}</InfoBlock>
+        <InfoItemTitle>{t('Bidding')}</InfoItemTitle>
+        {/* <InfoBlock>{product.delivery === '0' ? t('Bid') : t('Auction')}</InfoBlock> */}
+        {productCarts && productCarts.length > 0 && (
+           <p className="trading-line">
+            <span>Product Price</span>
+            <span>Bid Price</span>
+            <span>Date</span>
+          </p>
+        )}
+        {productCarts && productCarts.map((cart, index) => {
+          return (
+            <p className="trading-line">
+              <span>{cart.product_price} {handleTokenSwitch(cart.extoken)}</span>
+              <span>{cart.bidprice} {handleTokenSwitch(cart.extoken)}</span>
+              <span>{new Date(cart.createdAt).toLocaleDateString()}</span>
+            </p>
+          )
+        })}
       </InfoItem>
       <InfoItem>
-        <InfoItemTitle>{t('Contract Info')}</InfoItemTitle>
-        <InfoBlock>{product.delivery === '0' ? t('Bid') : t('Auction')}</InfoBlock>
+        <InfoItemTitle>{t('Trading History')}</InfoItemTitle>
+        {productOrders && productOrders.length > 0 && (
+            <p className="trading-line">
+              <span>Event</span>
+              <span>Price</span>
+              <span>From</span>
+              <span>To</span>
+              <span>Date</span>
+            </p>
+        )}
+        {productOrders && productOrders.map((order, index) => {
+          if (order.Order)
+            return (
+              <p className="trading-line">
+                <span>Buy</span>
+                <span>{(order.product_price)} {handleTokenSwitch(order.extoken)}</span>
+                <span>{truncStr(order.Order.seller_name)}</span>
+                <span>{truncStr(order.Order.client_name)}</span>
+                <span>{new Date(order.Order.createdAt).toLocaleDateString()}</span>
+              </p>
+            )
+          else return (<> </>)
+        })}
       </InfoItem>
       <InfoItem>
-        <InfoItemTitle>{t('Trade History')}</InfoItemTitle>
-        <InfoBlock>
-          {product.payment_method === '0' ? '' : ''}
-        </InfoBlock>
+        <InfoItemTitle>{t('Provenance')}</InfoItemTitle>
+        <div>
+          <p>Creator : {Creator.address}</p>
+          <p>Owner : {vendorInfo.address}</p>
+          <p>Contract Address : <span style={{cursor: 'pointer'}} onClick={() => {
+            window.open(`https://bscscan.com/address/${product.delivery_location}`)
+          }}>{product.delivery_location}</span></p>
+          <p>Token ID : {product.tokenId}</p>
+        </div>
       </InfoItem>
       <InfoItem style={{ borderBottom: 'none' }}>
-        <InfoItemTitle>{t('Warning')}</InfoItemTitle>
+        <InfoItemTitle>{t('Special notice')}</InfoItemTitle>
         <InfoBlock>
           {t('Discreet investment is suggested for the risk of the NFT market.')}
         </InfoBlock>

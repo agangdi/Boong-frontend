@@ -1,7 +1,7 @@
 {
   "name": "@uniswap/interface",
-  "description": "The Art of TEAsWAP",
-  "homepage": "https://app.teaswap.art",
+  "description": "The Art of Boong",
+  "homepage": "https://boong.org",
   "private": true,
   "devDependencies": {
     "@ethersproject/experimental": "^5.0.1",

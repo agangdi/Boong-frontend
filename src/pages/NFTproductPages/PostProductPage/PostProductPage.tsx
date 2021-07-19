@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import styled from 'styled-components';
 import {COLOR, DISTANCE, FONT, MEDIA_QUERY} from '../../../constants/style';
-import { InputItem } from '../../../components/productSystem';
+import { InputItem } from '../../../components/productSystem/';
 import useUser from '../../../hooks/userHooks/useUser';
 import useProduct from '../../../hooks/productHooks/useProduct';
 import useProductFrom from '../../../hooks/productHooks/useProductForm';
@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { useActiveWeb3React } from '../../../hooks';
 // import {PAYABLEETH, ZERO_ADDRESS} from "../../../constants";
 import {ChainId} from "@teaswap/uniswap-sdk";
-import {ZERO_ADDRESS, BUSD, UNI, DOT, BETH} from "../../../constants";
+import { tokenOptions} from "../../../constants";
 import {useNFTLastId, useUserFirstToken} from "../../../state/wallet/hooks";
 // import {SubmittedView} from "../../../components/ModalViews";
 // import {AutoColumn} from "../../../components/Column";
@@ -19,6 +19,7 @@ import {useNFTLastId, useUserFirstToken} from "../../../state/wallet/hooks";
 import MintModal  from "../../../components/NFT/mintModal"
 
 import { ActionButton } from '../../../components/NFTButton'
+import SetArtwork from '../../../components/userSystem/SetArtwork'
 
 
 const Wrapper = styled.div`
@@ -102,7 +103,7 @@ const PostProductPage = () => {
     setDelivery,
     setProductRoyalty,
     setRemark,
-    setProductQuantity,
+    // setProductQuantity,
     setProductToken,
     setProductMediaType,
     setDeliveryLocation,
@@ -114,14 +115,15 @@ const PostProductPage = () => {
     hasProductMediaType,
     hasProductPrice,
     hasDelivery,
-    hasProductQuantity,
+    // hasProductQuantity,
     productPictureUrl,
+    setProductPictureUrl,
     handleChangePicture,
     checkInputError,
     productCategory,
     productName,
     productPrice,
-    productQuantity,
+    // productQuantity,
     productInfo,
     delivery,
     deliveryLocation,
@@ -130,6 +132,7 @@ const PostProductPage = () => {
     productToken,
     productMediaType
   } = useProductFrom();
+  // setProductQuantity(1);
 
   const {user} = useUser()
   // const NFTFactoryContract = useNFTFactoryContract(NFTFACTORY[ChainId.BSC_MAINNET]);
@@ -275,20 +278,12 @@ const PostProductPage = () => {
   //   }
   // }, [hash]);
 
-  const tokenOptions = [
-    { id: '1', name: 'BNB',value:ZERO_ADDRESS },
-    { id: '2', name: 'BUSD',value:BUSD.address },
-    { id: '3', name: 'BC',value:UNI[ChainId.BSC_MAINNET].address },
-    { id: '4', name: 'DOT',value:DOT.address },
-    // { id: '5', name: 'CJAI',value:CJAI.address },
-    { id: '5', name: 'ETH',value:BETH.address}
-  ]
 
   const mediaTypeOptions = [
-    { id: '1', name: 'Picture' },
-    { id: '2', name: 'Gif' },
-    { id: '3', name: 'Video' },
-    { id: '4', name: 'Audio' },
+    { id: '1', name: 'Picture', value: 1 },
+    { id: '2', name: 'Gif', value: 2 },
+    { id: '3', name: 'Video', value: 3 },
+    { id: '4', name: 'Audio', value: 4 },
   ]
   //Royalties: 1%, 5% , 10%, 20% 30%
   const royaltyOptions = [
@@ -372,7 +367,7 @@ const PostProductPage = () => {
           value={productMediaType}
         />
 
-        <InputItem
+        {/* <InputItem
           title={t('Upload Artwork')}
           label={t('Upload Artwork')}
           type={'picture'}
@@ -384,7 +379,16 @@ const PostProductPage = () => {
           options={undefined}
           textareaRows={1}
           value={productPictureUrl}
-        />
+        /> */}
+        {/* <QuestionBox>
+          <PictureBox
+            productMediaType={productMediaType} 
+            pictureUrl={productPictureUrl}
+            handleChange={handleChangePicture}
+          />
+        </QuestionBox> */}
+        <QuestionTitle>{t('Upload Artwork')}</QuestionTitle>
+        <SetArtwork productPictureUrl={productPictureUrl} handleChangePicture={handleChangePicture} setProductPictureUrl={setProductPictureUrl}/>
 
         <InputItem
           title={t('Category')}
@@ -428,7 +432,7 @@ const PostProductPage = () => {
           value={productPrice}
         />
 
-        <InputItem
+        {/* <InputItem
           title={t('Number')}
           label={t('Number (ERC1155)')}
           type={'input'}
@@ -440,7 +444,7 @@ const PostProductPage = () => {
           productPictureUrl={undefined}
           textareaRows={1}
           value={productQuantity}
-        />
+        /> */}
 
         <InputItem
           label={t('How to buy')}
@@ -448,7 +452,7 @@ const PostProductPage = () => {
           type={'radio'}
           options={[
             { name: t('Bid'), id: '0',value:0 },
-            { name: t('Auction'), id: '1',value:1 },
+            { name: t('Auction'), id: '1',value:1, disable: true },
           ]}
           hasValue={hasDelivery}
           errorMessage={t('please choose')}
@@ -518,3 +522,11 @@ const PostProductPage = () => {
 };
 
 export default PostProductPage;
+const QuestionTitle = styled.div`
+  margin-bottom: 10px;
+  color: #474747;
+  font-size: 14px;
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+`;

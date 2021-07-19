@@ -5,6 +5,7 @@ import { postPictureAPI } from '../../webAPI/productAPI';
 import {
   postProduct,
   updateProduct,
+  setPrice
 } from '../../redux/slices/productSlice/productSlice';
 import { useTranslation } from 'react-i18next'
 import {MintInfoInterface} from "../useMintCallback";
@@ -42,6 +43,11 @@ export default function useProductForm(id) {
   const [hasDelivery, setHasDelivery] = useState('');
   const [hasPaymentMethod, setHasPaymentMethod] = useState('');
   const [hasProductQuantity, setHasProductQuantity] = useState('');
+
+    
+  const [isCheckImage, setIsCheckImage] = useState(false)
+  const [uploadError, setUploadError] = useState('')
+  const [isLoadingUpload, setIsLoadingUpload] = useState(false)
 
 
   let hasError = false;
@@ -95,12 +101,12 @@ export default function useProductForm(id) {
       setHasProductPrice(true);
     }
 
-    if (!checkValidNumber(productQuantity, 1000, 1)) {
-      hasError = true;
-      setHasProductQuantity(false);
-    } else {
-      setHasProductQuantity(true);
-    }
+    // if (!checkValidNumber(productQuantity, 1000, 1)) {
+    //   hasError = true;
+    //   setHasProductQuantity(false);
+    // } else {
+    //   setHasProductQuantity(true);
+    // }
 
     if (!checkValidNumber(delivery, 2, 0)) {
       hasError = true;
@@ -191,20 +197,52 @@ export default function useProductForm(id) {
     navigate('/nft/users/backstage')
   };
 
+  const handleResaleProduct = (product,reSalePrice,reSaleToken) => {
+    // checkDataValidity();
+    // if (!hasError) {
+    // product.price=reSalePrice;
+    // product.extoken=reSaleToken;
+    debugger
+    updateProduct(product.id,product,reSalePrice,reSaleToken,'0')(dispatch);
+    // }
+    // navigate('/nft/users/backstage')
+  };
+
+  const handleSetPrice = (product,price) => {
+    // checkDataValidity();
+    // if (!hasError) {
+    product.price=price;
+    setPrice(product.id,price,product.UserId)(dispatch);
+    // }
+    // navigate('/nft/users/backstage')
+  };
+
   const handleSubmitEditForm = (e) => {
     e.preventDefault();
     checkDataValidity();
     setIsSubmitClicked(true);
     if (!hasError) {
+      debugger
       updateProduct(id, formData)(dispatch);
       navigate('/nft/users/backstage');
     }
   };
 
-  const handleChangePicture = (e) => {
+  const handleChangePicture = (e, setProductPictureUrl) => {
     const formData = new FormData();
+    console.log('handleChangePicture', e.target.files[0])
+    console.log('productMediaType', productMediaType)
+    setUploadError('')
+    setIsCheckImage(true);
+    setIsLoadingUpload(true)
     formData.append('image', e.target.files[0]);
-    postPictureAPI(formData).then((res) => setProductPictureUrl(res.data.link));
+    postPictureAPI(formData).then((res) => {
+      if (res.ok === 0) return setUploadError(res.message);
+      setIsLoadingUpload(false);
+      setIsCheckImage(false);
+      console.log('setProductPictureUrl', res.data.link)
+      setProductPictureUrl(res.data.link)
+    })
   };
 
   return {
@@ -222,6 +260,9 @@ export default function useProductForm(id) {
     productPictureUrl,
     productMediaType,
     remark,
+    isCheckImage,
+    isLoadingUpload,
+    uploadError,
 
     hasProductName,
     hasProductInfo,
@@ -236,6 +277,7 @@ export default function useProductForm(id) {
     hasProductMediaType,
     hasProductRoyalty,
 
+    setIsCheckImage,
     setProductName,
     setProductInfo,
     setProductCategory,
@@ -260,6 +302,8 @@ export default function useProductForm(id) {
     handleSubmitEditForm,
     handleChangePicture,
     handleSubmitProduct,
-    checkInputError
+    checkInputError,
+    handleSetPrice,
+    handleResaleProduct
   };
 }

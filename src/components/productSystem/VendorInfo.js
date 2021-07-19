@@ -26,7 +26,7 @@ const VendorInfoTop = styled.div`
 `;
 
 const VendorName = styled.div`
-  font-size: ${FONT.md};
+  font-size: ${FONT.xs};
   color: ${COLOR.text_2};
 `;
 
@@ -93,11 +93,7 @@ const InfoWrap = styled(InfoItem)`
 
   ${InfoItemTitle} {
     min-width: 150px;
-    font-size: ${FONT.sm};
-
-    &:after {
-      content: ' : ';
-    }
+    font-size: ${FONT.xs};
   }
 
   ${InfoItem} {
@@ -124,27 +120,20 @@ const InfoItemBlock = styled(InfoBlock)`
 
 const VendorInfoItem = () => {
   const {t} = useTranslation();
-  const { averageShippingTime, productCount } = useProduct();
+  const { averageShippingTime, userCreated, userSold, vendorInfo } = useProduct();
   return (
     <InfoWrap>
       <InfoItem>
-        <InfoItemTitle>{t('Works Amount')}</InfoItemTitle>
-        <InfoItemBlock>{productCount}</InfoItemBlock>
+        <InfoItemTitle>{t('Created')} : {userCreated}</InfoItemTitle>
       </InfoItem>
       <InfoItem>
-        <InfoItemTitle>{t('Sold Amount')}</InfoItemTitle>
-        <InfoItemBlock>2</InfoItemBlock>
+        <InfoItemTitle>{t('Sold')} : {userSold}</InfoItemTitle>
       </InfoItem>
       <InfoItem>
-        <InfoItemTitle>{t('Like Amount')}</InfoItemTitle>
-        <InfoItemBlock>3</InfoItemBlock>
+        <InfoItemTitle>{t('Like')} : {vendorInfo.likes}</InfoItemTitle>
       </InfoItem>
       <InfoItem>
-        <InfoItemTitle>{t('Watch Amount')}</InfoItemTitle>
-        {/*<InfoItemBlock>*/}
-        {/*  {averageShippingTime ? `${averageShippingTime} 日內` : '暫無商品'}*/}
-        {/*</InfoItemBlock>*/}
-        <InfoItemBlock>1000</InfoItemBlock>
+        <InfoItemTitle>{t('View')} : {vendorInfo.views}</InfoItemTitle>
       </InfoItem>
     </InfoWrap>
   );
@@ -164,10 +153,12 @@ export const VendorInfo = () => {
             />
           </a>
         </AvatarContainer>
-        <VendorName>{vendorInfo.nickname}</VendorName>
+        <a class='a-link' href={`/nft/products/vendor/${vendorInfo.id}`}>
+          <VendorName>{vendorInfo.nickname}</VendorName>
+        </a>
       </VendorInfoTop>
       {/*<Buttons />*/}
-      <VendorInfoItem />
+      <VendorInfoItem/>
     </VendorInfoContainer>
   );
 };

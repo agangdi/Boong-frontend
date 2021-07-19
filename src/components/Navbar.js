@@ -127,12 +127,12 @@ const Navbar = () => {
 
         <RightSide>
           <OptionList>
-            {isAdmin && <Nav children={'管理後台'} path={'/admin'} />}
+            {/* {isAdmin && <Nav children={'管理後台'} path={'/nft/admin'} />} */}
             {userId && (
               <>
                 <User />
-                <Cart />
-                <Notification />
+                {/* <Cart /> */}
+                {/* <Notification /> */}
               </>
             )}
             {/*{isUserLoading ? (*/}
