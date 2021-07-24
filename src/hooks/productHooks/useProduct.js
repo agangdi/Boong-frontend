@@ -167,7 +167,7 @@ export default function useProduct() {
 
     if (!extoken) return;
 
-    let extokenName = 'TSA'
+    let extokenName = 'BC'
     for(let i = 0 ;i<tokenOptions.length;i++){
         if(tokenOptions[i].value === extoken){
             extokenName=tokenOptions[i].name
