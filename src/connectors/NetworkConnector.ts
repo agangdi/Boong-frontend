@@ -56,6 +56,7 @@ class MiniRpcProvider implements AsyncSendable {
     this.batch = []
     this.batchTimeoutId = null
     let response: Response
+    console.log("clearBatch", this.url, batch)
     try {
       response = await fetch(this.url, {
         method: 'POST',
@@ -66,6 +67,7 @@ class MiniRpcProvider implements AsyncSendable {
       batch.forEach(({ reject }) => reject(new Error('Failed to send batch call')))
       return
     }
+    console.log("clearBatch response", response)
 
     if (!response.ok) {
       batch.forEach(({ reject }) => reject(new RequestError(`${response.status}: ${response.statusText}`, -32000)))

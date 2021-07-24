@@ -15,7 +15,7 @@ import {
   useUserHasSubmittedBid
 } from "../../state/transactions/hooks";
 import {ApprovalState, useApproveCallback} from "../../hooks/useApproveCallback";
-import {BETH, BUSD, CJAI, DOT, NFTEXCHANGE, PAYABLEETH, SHIH, UNI, ZERO_ADDRESS} from "../../constants";
+import {BETH, BUSD, DOT, NFTEXCHANGE, PAYABLEETH, UNI, ZERO_ADDRESS} from "../../constants";
 import {TransactionResponse} from "@ethersproject/providers";
 import {useETHBalances, useTokenBalance} from "../../state/wallet/hooks";
 import {ChainId, ETHER, JSBI} from "@teaswap/uniswap-sdk";
