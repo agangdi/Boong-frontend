@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import useProduct from '../../hooks/productHooks/useProduct';
 import { MEDIA_QUERY } from '../../constants/style';
 import { useTranslation } from 'react-i18next';
-import {truncStr} from '../../utils/strUtil'
+import {hideAddr} from '../../utils/strUtil'
+import ClickableAddr from './ClickableAddr'
 
 const ProductPictureContainer = styled.div`
   position: relative;
@@ -55,7 +56,7 @@ const ProductInfoWrap = styled.div`
   line-height: 1.5rem;
   width: 100%;
   font-weight: normal;
-  color: ${COLOR.text_2};
+  color: ${COLOR.black};
   white-space: pre-line;
   word-break: break-all;
 `;
@@ -114,6 +115,8 @@ export const FreightIntro = ({ product }) => {
         {/* <InfoBlock>{product.delivery === '0' ? t('Bid') : t('Auction')}</InfoBlock> */}
         {productCarts && productCarts.length > 0 && (
            <p className="trading-line">
+            <span>Event</span>
+            <span>Address</span>
             <span>Product Price</span>
             <span>Bid Price</span>
             <span>Date</span>
@@ -122,6 +125,8 @@ export const FreightIntro = ({ product }) => {
         {productCarts && productCarts.map((cart, index) => {
           return (
             <p className="trading-line">
+              <span>{cart.status == 0 ? 'bidding' : cart.status == 1 ? 'trading' : 'withdrawn'}</span>
+              <ClickableAddr address={cart.userAddress} />
               <span>{cart.product_price} {handleTokenSwitch(cart.extoken)}</span>
               <span>{cart.bidprice} {handleTokenSwitch(cart.extoken)}</span>
               <span>{new Date(cart.createdAt).toLocaleDateString()}</span>
@@ -146,8 +151,8 @@ export const FreightIntro = ({ product }) => {
               <p className="trading-line">
                 <span>Buy</span>
                 <span>{(order.product_price)} {handleTokenSwitch(order.extoken)}</span>
-                <span>{truncStr(order.Order.seller_name)}</span>
-                <span>{truncStr(order.Order.client_name)}</span>
+                <ClickableAddr address={order.Order.seller_address} />
+                <ClickableAddr address={order.Order.client_address} />
                 <span>{new Date(order.Order.createdAt).toLocaleDateString()}</span>
               </p>
             )
@@ -157,11 +162,9 @@ export const FreightIntro = ({ product }) => {
       <InfoItem>
         <InfoItemTitle>{t('Provenance')}</InfoItemTitle>
         <div>
-          <p>Creator : {Creator.address}</p>
-          <p>Owner : {vendorInfo.address}</p>
-          <p>Contract Address : <span style={{cursor: 'pointer'}} onClick={() => {
-            window.open(`https://bscscan.com/address/${product.delivery_location}`)
-          }}>{product.delivery_location}</span></p>
+          <p>Creator : <ClickableAddr address={Creator.address} /></p>
+          <p>Owner : <ClickableAddr address={vendorInfo.address} /></p>
+          <p>Contract Address : <ClickableAddr address={product.delivery_location} /></p>
           <p>Token ID : {product.tokenId}</p>
         </div>
       </InfoItem>

@@ -151,7 +151,7 @@ export const BNB_TSA_LP = new Token(
     '0xab8f32d5e14d84b21befe0cc57b63e086af558e1',
     18,
     'BNB-TSA BLP',
-    'BNB_TSA_BakeryLP'
+    'BNB_TSA_takeryLP'
 )
 
 export const BUSD_SHIH_LP = new Token(

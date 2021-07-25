@@ -61,7 +61,6 @@ const OtherProductTitle = styled.div`
 `;
 
 const MoreLink = styled.a`
-  margin: 0 20px;
   color: #7f7f7f;
   display: inline-block;
   text-decoration: none;
@@ -132,7 +131,7 @@ const ProductPage = () => {
           {products.length !== 0 ? (
           <>
             <OtherProductWrap>
-              <OtherProductTitle>{t('More by this creator')}</OtherProductTitle>
+              <OtherProductTitle>{t('Related works')}</OtherProductTitle>
               <MoreLink className="a-link" href={`/nft/products/vendor/${vendorInfo.id}`}>
                 {t('View all')}
               </MoreLink>

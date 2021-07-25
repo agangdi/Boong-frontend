@@ -23,10 +23,10 @@ import SetArtwork from '../../../components/userSystem/SetArtwork'
 
 
 const Wrapper = styled.div`
-  width: 86%;
+  width: 100%;
   max-width: 820px
   margin: 0 auto;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1), 0px 16px 24px rgba(0, 0, 0, 0.1),
     0px 24px 32px rgba(0, 0, 0, 0.1);
   ${MEDIA_QUERY.sm} {
-    width: calc(100% -20px);
+    width: 100%;
     padding: 10px;
     padding-left: 10px;
     padding-bottom: 50px;
@@ -280,14 +280,15 @@ const PostProductPage = () => {
 
 
   const mediaTypeOptions = [
-    { id: '1', name: 'Picture', value: 1 },
-    { id: '2', name: 'Gif', value: 2 },
-    { id: '3', name: 'Video', value: 3 },
-    { id: '4', name: 'Audio', value: 4 },
+    { id: '1', name: 'Picture',value:'Picture' },
+    { id: '2', name: 'Gif',value:'Gif' },
+    { id: '3', name: 'Video',value:'Video' },
+    { id: '4', name: 'Audio',value:'Audio' },
   ]
   //Royalties: 1%, 5% , 10%, 20% 30%
   const royaltyOptions = [
     { id: '0', name: '0%',value:0 },
+    { id: '1', name: '1%',value:100 },
     { id: '5', name: '5%' ,value:500},
     { id: '10', name: '10%',value:1000 },
     { id: '20', name: '20%',value:2000},
@@ -525,7 +526,7 @@ export default PostProductPage;
 const QuestionTitle = styled.div`
   margin-bottom: 10px;
   color: #474747;
-  font-size: 14px;
+  font-size: 12px;
   width: 100%;
   max-width: 600px;
   text-align: left;
