@@ -280,10 +280,10 @@ const PostProductPage = () => {
 
 
   const mediaTypeOptions = [
-    { id: '1', name: 'Picture',value:'Picture' },
-    { id: '2', name: 'Gif',value:'Gif' },
-    { id: '3', name: 'Video',value:'Video' },
-    { id: '4', name: 'Audio',value:'Audio' },
+    { id: '1', name: 'Picture',value:1 },
+    { id: '2', name: 'Gif',value: 2 },
+    { id: '3', name: 'Video',value:'3' },
+    { id: '4', name: 'Audio',value:'4' },
   ]
   //Royalties: 1%, 5% , 10%, 20% 30%
   const royaltyOptions = [
