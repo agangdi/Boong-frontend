@@ -6,6 +6,7 @@ import {
   deleteItem,
   deleteItemsBySeller,
   createOrder as createOrderAPI,
+  completeOrder
 } from "../../../webAPI/cartAPI";
 
 export const cartSlice = createSlice({
@@ -102,9 +103,9 @@ export const getCartItem = () => (dispatch) => {
   });
 };
 
-export const addCartItem = (productId, quantity, id, price) => (dispatch) => {
+export const addCartItem = (productId, quantity, id, price,orderid) => (dispatch) => {
   dispatch(setIsLoading(true));
-  return addItem(productId, quantity, id, price).then((res) => {
+  return addItem(productId, quantity, id, price,orderid).then((res) => {
     getCartItem()(dispatch);
     dispatch(setIsLoading(false));
     return res;
@@ -126,7 +127,7 @@ export const addQuantity = (quantity, id) => (dispatch) => {
 };
 export const deleteCartItem = (id) => (dispatch) => {
   return deleteItem(id).then((res) => {
-    dispatch(getCartItem());
+    getCartItem()(dispatch);
     return res;
   });
 };
@@ -140,7 +141,8 @@ export const createOrder = (readyToOrderItems) => (dispatch) => {
   dispatch(setIsLoading(true));
   return createOrderAPI(readyToOrderItems).then((res) => {
     dispatch(setIsLoading(false));
-    dispatch(setOrderNumber(res.orderNumber));
+    dispatch(setOrderNumber(res.orderId));
+    completeOrder(res.orderId).then((res)=>{console.log(JSON.stringify(res))});
   });
 };
 
