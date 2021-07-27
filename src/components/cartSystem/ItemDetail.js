@@ -98,7 +98,7 @@ export default function ItemDetail({ Item }) {
         { name: 'BNB',address:ZERO_ADDRESS,token:PAYABLEETH[ChainId.BSC_MAINNET] },
         { name: 'BUSD',address:BUSD.address,token:BUSD },
         { name: 'ETH',address:BETH.address,token:BETH },
-        {name:'DOT',address:DOT.address,token:DOT},
+        // {name:'DOT',address:DOT.address,token:DOT},
         { name: 'BC',address:UNI[ChainId.BSC_MAINNET].address,token:UNI[ChainId.BSC_MAINNET] }
     ]
 
