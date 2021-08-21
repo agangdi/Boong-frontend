@@ -24,25 +24,30 @@ export enum ApprovalState {
 // returns a variable indicating the state of the approval and a function which approves if necessary or early returns
 export function useApproveCallback(
   amountToApprove?: CurrencyAmount,
-  spender?: string
+  spender?: string,
+  isNFT?:boolean,
+  tokenid?:string
 ): [ApprovalState, () => Promise<void>  ] {
   const { account } = useActiveWeb3React()
   const token = amountToApprove instanceof TokenAmount ? amountToApprove.token : undefined
 
-  const currentAllowance = useTokenAllowance(token, account ?? undefined, spender)
+  const currentAllowance = useTokenAllowance(token, account ?? undefined, spender,isNFT,tokenid)
   const pendingApproval = useHasPendingApproval(token?.address===ZERO_ADDRESS?undefined:token?.address, spender)
 
   // check the current approval status
   const approvalState: ApprovalState = useMemo(() => {
+    console.log("currentAllowance:"+currentAllowance)
+    console.log("amountToApprove:"+JSON.stringify(amountToApprove))
+    console.log("spender:"+spender)
     if (!amountToApprove || !spender) return ApprovalState.UNKNOWN
     if(!token) return ApprovalState.APPROVED
     if(token.address===ZERO_ADDRESS) return ApprovalState.APPROVED
     if (amountToApprove.currency === ETHER) return ApprovalState.APPROVED
     // we might not have enough data to know whether or not we need to approve
-    if (!currentAllowance) return ApprovalState.UNKNOWN
+    if (!currentAllowance && !isNFT) return ApprovalState.UNKNOWN
 
     // amountToApprove will be defined if currentAllowance is
-    return currentAllowance.lessThan(amountToApprove)
+    return (currentAllowance?.lessThan(amountToApprove)||isNFT)
       ? pendingApproval
         ? ApprovalState.PENDING
         : ApprovalState.NOT_APPROVED
@@ -78,14 +83,16 @@ export function useApproveCallback(
     }
 
     let useExact = false
-    const estimatedGas = await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
+    const estimatedGas = isNFT?
+        await tokenContract.estimateGas.approve(spender, BigInt(tokenid))
+        :await tokenContract.estimateGas.approve(spender, MaxUint256).catch(() => {
       // general fallback for tokens who restrict approval amounts
-      useExact = true
-      return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
-    })
+          useExact = true
+          return tokenContract.estimateGas.approve(spender, amountToApprove.raw.toString())
+        })
 
     return tokenContract
-      .approve(spender, useExact ? amountToApprove.raw.toString() : MaxUint256, {
+      .approve(spender, !isNFT ? useExact ? amountToApprove.raw.toString() : MaxUint256:BigInt(tokenid), {
         gasLimit: calculateGasMargin(estimatedGas)
       })
       .then((response: TransactionResponse) => {
@@ -98,7 +105,7 @@ export function useApproveCallback(
         console.debug('Failed to approve token', error)
         throw error
       })
-  }, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction])
+  }, [approvalState, token, tokenContract, amountToApprove, spender, addTransaction,tokenid])
 
   return [approvalState, approve]
 }
@@ -118,7 +125,8 @@ export function useApproveCallbackFromTrade(trade?: Trade, allowedSlippage = 0) 
 export function useApproveNFTCallback(
     to?: string,
     lastTokenId?: number,
-    tokenAddress?:string
+    tokenAddress?:string,
+    isreSale?:boolean
 ): [ApprovalState, () => Promise<void>  ] {
 
   const tokenIdres = useNFTLastId(tokenAddress)
@@ -128,12 +136,18 @@ export function useApproveNFTCallback(
     console.log("tokenIdres:"+tokenIdres)
     console.log("lastTokenId:"+lastTokenId)
 
-      if (tokenIdres) {
+    if(isreSale){
+      if(lastTokenId){return lastTokenId}
+      else{return undefined}
+    }
+    if (tokenIdres) {
           return tokenIdres-1
       }else{
           return undefined
       }
-  },[tokenIdres])
+  },[lastTokenId,tokenIdres])
+
+  console.log("tokenid:"+tokenId)
 
   const currentAllowance = useNFTAllowance(tokenAddress,tokenId)
   const pendingApproval = useHasPendingNFTApproval(tokenAddress, to,tokenId)
@@ -170,6 +184,7 @@ export function useApproveNFTCallback(
       return
     }
 
+    console.log("tokenIDinApprove:"+tokenId)
     if (tokenId === undefined) {
       console.error('missing tokenId to approve')
       return
@@ -179,6 +194,8 @@ export function useApproveNFTCallback(
       console.error('no spender')
       return
     }
+
+    console.log("tokenID:"+tokenId)
 
     const estimatedGas = await nftContract.estimateGas.approve(to, tokenId).catch(() => {
       // general fallback for tokens who restrict approval amounts
